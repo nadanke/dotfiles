@@ -74,7 +74,7 @@
     home.stateVersion = "23.11";
     programs.fish.enable = true;
     programs.fish.functions = {
-      ls = "lsd";
+      ls = "lsd $argv";
     };
   };
 
