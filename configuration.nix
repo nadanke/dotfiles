@@ -8,6 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      <home-manager/nixos>
     ];
 
   # spotify
@@ -68,6 +69,15 @@
     packages = with pkgs; [];
   };
 
+  home-manager.users.nadanke = { pkgs, ... }: {
+    home.packages = [];
+    home.stateVersion = "23.11";
+    programs.fish.enable = true;
+    programs.fish.functions = {
+      ls = "lsd";
+    };
+  };
+
   # Enable automatic login for the user.
   services.getty.autologinUser = "nadanke";
 
@@ -79,7 +89,6 @@
   environment.systemPackages = with pkgs; [
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
 	helix
-	fish
   alacritty
   brave
   vscodium
