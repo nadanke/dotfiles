@@ -15,7 +15,7 @@
       ./modules/vscode.nix
       ./modules/steam.nix
       ./modules/containers.nix
-      <home-manager/nixos>
+      # <home-manager/nixos>
     ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
