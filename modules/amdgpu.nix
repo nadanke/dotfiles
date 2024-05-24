@@ -6,6 +6,10 @@
         "w /sys/class/drm/card1/device/pp_power_profile_mode - - - - 1"
     ];
 
+    environment.systemPackages = with pkgs; [
+        lact
+    ];
+
     systemd.services.lact = {
         description = "AMDGPU Control Daemon";
         after = ["multi-user.target"];

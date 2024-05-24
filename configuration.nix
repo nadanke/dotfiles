@@ -36,7 +36,6 @@
     mpv
     goverlay
     mangohud
-    lact
     signal-desktop
     docker-compose
     podman-tui
