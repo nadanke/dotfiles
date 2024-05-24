@@ -22,7 +22,6 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     helix
-    alacritty
     kdePackages.plasma-pa
     gamescope
     gamescope-wsi
@@ -33,8 +32,6 @@
     element-desktop
     spotify
     mpv
-    nerdfonts
-    jetbrains-mono
     goverlay
     mangohud
     lact
@@ -43,6 +40,23 @@
     podman-tui
     dive
     tealdeer
+    xfce.thunar
+    lxqt.lxqt-policykit
+    dunst
+    waybar
+    wofi
+    bat
+    fd
+    ripgrep
+  ];
+
+  fonts.packages = with pkgs; [
+    inter
+    jetbrains-mono
+    nerdfonts
+    noto-fonts
+    noto-fonts-cjk
+    noto-fonts-emoji
   ];
 }
 
