@@ -3,6 +3,7 @@
 {
     programs.steam.enable = true;
 
+    # this is currently needed for gamescope to work with steam and shouldn't be needed once the mr is merged
     nixpkgs.config.packageOverrides = pkgs: {
         steam = pkgs.steam.override {
             extraPkgs = pkgs: with pkgs; [

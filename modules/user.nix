@@ -21,6 +21,35 @@
       cat = "bat $argv";
     };
 
+    programs.waybar = {
+      enable = true;
+      settings = {
+        mainBar = {
+          layer = "top";
+          position = "bottom";
+          modules-left = [ "hyprland/workspaces" ];
+          modules-center = [ "hyprland/window" ];
+          modules-right = [ "wireplumber" "clock" "tray" ];
+          output = [
+            "DP-1"
+            "HDMI-A-2"
+          ];
+          spacing = 8;
+        };
+      };
+    };
+    home.file.waybarStyles = {
+      enable = true;
+      target = ".config/waybar/style.css";
+      text = ''
+        #workspaces button.active {
+          background: rgba(123,39,211,0.4);
+          border-radius: 0;
+        }
+      '';
+    };
+    
+
     programs.alacritty = {
       enable = true;
       settings = {
@@ -43,7 +72,7 @@
     home.pointerCursor = {
       gtk.enable = true;
       package = pkgs.bibata-cursors;
-      name = "Bibata-Modern-Classic";
+      name = "Bibata-Original-Classic";
       size = 16;
     };
 
@@ -78,7 +107,8 @@
       "$mod" = "SUPER";
       monitor = [
         "DP-1,3840x2160@165,0x0,1.25,vrr,2"
-        "HDMI-A-1,3840x2160@120,-3840x0,1,vrr,2"
+        #"HDMI-A-1,3840x2160@120,-3840x0,1,vrr,2"
+        "HDMI-A-1,disable"
         "HDMI-A-2,3840x2160@60,3072x288,1.5,vrr,0"
       ];
       exec-once = [
@@ -86,10 +116,23 @@
         "dunst"
         "waybar"
       ];
+
+      dwindle = {
+        preserve_split = true;
+      };
+      
       bindm = [
         "$mod, mouse:272, movewindow"
         "$mod, mouse:273, resizewindow"
       ];
+      bindel = [
+        ", XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
+        ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
+      ];
+      bindl = [
+        ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+      ];
+
       bind =
         [
           "$mod, x, exec, brave"
@@ -98,15 +141,15 @@
           "$mod, m, exit,"
           "$mod, c, exec, thunar"
           "$mod, j, togglesplit,"
-          "$mod, s, exec, wofi --allow-images --show drun"
+          "$mod, s, exec, wofi --allow-images --show drun,run"
 
           "$mod, left, movefocus, l"
           "$mod, right, movefocus, r"
           "$mod, up, movefocus, u"
           "$mod, down, movefocus, d"
 
-          "$mod, i, movefocus, l"
-          "$mod, n, movefocus, r"
+          "$mod, i, movefocus, r"
+          "$mod, n, movefocus, l"
           "$mod, u, movefocus, u"
           "$mod, e, movefocus, d"
 
@@ -116,8 +159,8 @@
           "$mod SHIFT, up, movewindow, u"
           "$mod SHIFT, down, movewindow, d"
 
-          "$mod SHIFT, i, movewindow, l"
-          "$mod SHIFT, n, movewindow, r"
+          "$mod SHIFT, i, movewindow, r"
+          "$mod SHIFT, n, movewindow, l"
           "$mod SHIFT, u, movewindow, u"
           "$mod SHIFT, e, movewindow, d"
 
