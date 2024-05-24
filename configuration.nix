@@ -76,6 +76,19 @@
     programs.fish.functions = {
       ls = "lsd $argv";
     };
+    dconf = {
+      enable = true;
+      settings."org/gnome/desktop/interface".color-scheme = "prefer-dark";
+    };
+    programs.chromium = {
+      enable = true;
+      package = pkgs.brave;
+      extensions = [
+        { id = "cjpalhdlnbpafiamejdnhcphjbkeiagm"; }
+        { id = "ghmbeldphafepmbegfdlkpapadhbakde"; }
+        { id = "jinjaccalgkegednnccohejagnlnfdag"; }
+      ];
+    };
   };
 
   # Enable automatic login for the user.
@@ -90,8 +103,20 @@
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
 	helix
   alacritty
-  brave
-  vscodium
+  (vscode-with-extensions.override {
+    vscode = vscodium;
+    vscodeExtensions = with vscode-extensions; [
+      svelte.svelte-vscode
+      bbenoist.nix
+    ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+      {
+        name = "copilot";
+        publisher = "GitHub";
+        version = "1.192.0";
+        sha256 = "sha256-t3YngT6ep11gP4Mk8YpJ3WDykQNq0j6oB4+B5SEJck8=";
+      }
+    ];
+  })
   kdePackages.plasma-pa
   gamescope
   gamescope-wsi
