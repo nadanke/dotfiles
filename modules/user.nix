@@ -53,13 +53,19 @@
           position = "bottom";
           modules-left = [ "hyprland/workspaces" ];
           modules-center = [ "hyprland/window" ];
-          modules-right = [ "wireplumber" "clock" "tray" ];
+          modules-right = [ "load" "wireplumber" "clock" "tray" ];
           output = [
             "DP-1"
             "HDMI-A-2"
           ];
           spacing = 8;
           height = 26;
+          tray = {
+            spacing = 4;
+          };
+          wireplumber = {
+            on-click = "pavucontrol";
+          };
         };
       };
     };
@@ -205,6 +211,8 @@
           "$mod, c, exec, thunar"
           "$mod, j, togglesplit,"
           "$mod, s, exec, wofi --allow-images --show drun,run"
+
+          "$mod, t, fullscreen"
 
           "$mod, left, movefocus, l"
           "$mod, right, movefocus, r"

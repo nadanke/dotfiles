@@ -19,6 +19,10 @@
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+  nix.settings.max-jobs = 32;
+
+  chaotic.mesa-git.enable = true;
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -51,6 +55,9 @@
     wl-clipboard
     cifs-utils
     nodejs_20
+    solaar
+    dosfstools
+    e2fsprogs
   ];
 
   programs.thunar = {
