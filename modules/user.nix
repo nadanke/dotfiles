@@ -22,6 +22,19 @@
       cat = "bat $argv";
     };
 
+    programs.git = {
+      enable = true;
+      userName = "Mario Bruestle";
+      userEmail = "mario.bruestle@pm.me";
+      extraConfig = {
+        color = {
+          ui = true;
+          pager = true;
+        };
+      };
+    };
+
+
     programs.lsd = {
       enable = true;
       enableAliases = true;
@@ -168,6 +181,8 @@
         preserve_split = true;
         no_gaps_when_only = true;
       };
+
+      xwayland.force_zero_scaling = true;
       
       bindm = [
         "$mod, mouse:272, movewindow"
