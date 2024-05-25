@@ -18,8 +18,8 @@
     home.stateVersion = "23.11";
     programs.fish.enable = true;
     programs.fish.functions = {
-      #ls = "lsd $argv";
       cat = "bat $argv";
+      codium-ext-up = "~/nixpkgs/pkgs/applications/editors/vscode/extensions/update_installed_exts.sh";
     };
 
     programs.git = {
