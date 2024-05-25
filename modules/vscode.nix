@@ -7,6 +7,8 @@
             vscodeExtensions = with vscode-extensions; [
                 svelte.svelte-vscode
                 bbenoist.nix
+                haskell.haskell
+                justusadam.language-haskell
             ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
                 {
                     name = "copilot";

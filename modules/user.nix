@@ -35,6 +35,7 @@
             "HDMI-A-2"
           ];
           spacing = 8;
+          height = 26;
         };
       };
     };
@@ -42,9 +43,32 @@
       enable = true;
       target = ".config/waybar/style.css";
       text = ''
+        * {
+          font-family: Inter;
+        }
+      
         #workspaces button.active {
           background: rgba(123,39,211,0.4);
           border-radius: 0;
+        }
+
+        window#waybar {
+          background: rgba(93, 123, 81, 0.4);
+        }
+
+        #clock, #tray {
+          padding-right: 8px;
+        }
+
+        #workspaces,
+        #workspaces * {
+          padding: 0;
+          margin: 0;
+        }
+
+        #workspaces button {
+          padding-left: 5px;
+          padding-right: 5px;
         }
       '';
     };
