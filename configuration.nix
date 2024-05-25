@@ -41,7 +41,6 @@
     podman-tui
     dive
     tealdeer
-    xfce.thunar
     lxqt.lxqt-policykit
     dunst
     wofi
@@ -49,7 +48,20 @@
     fd
     ripgrep
     wlr-randr
+    jetbrains.webstorm
   ];
+
+  programs.thunar = {
+    enable = true;
+    plugins = with pkgs.xfce; [
+      thunar-archive-plugin
+      thunar-volman
+    ];
+  };
+  # without this you can't save preferences in thunar when not running xfce
+  programs.xfconf.enable = true;
+  services.gvfs.enable = true;
+  services.tumbler.enable = true;
 
   fonts.packages = with pkgs; [
     inter

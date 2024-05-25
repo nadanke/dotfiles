@@ -11,14 +11,25 @@
     # Enable automatic login for the user.
     services.getty.autologinUser = "nadanke";
 
-
     home-manager.users.nadanke = { pkgs, ... }: {
-    home.packages = [];
+    home.packages = [
+      pkgs.pavucontrol
+    ];
     home.stateVersion = "23.11";
     programs.fish.enable = true;
     programs.fish.functions = {
-      ls = "lsd $argv";
+      #ls = "lsd $argv";
       cat = "bat $argv";
+    };
+
+    programs.lsd = {
+      enable = true;
+      enableAliases = true;
+    };
+
+    programs.zoxide = {
+      enable = true;
+      enableFishIntegration = true;
     };
 
     programs.waybar = {
@@ -125,6 +136,18 @@
         { id = "jinjaccalgkegednnccohejagnlnfdag"; }
       ];
     };
+
+    services.hyprpaper = {
+      enable = true;
+      settings = {
+        splash = false;
+        preload = [ ];
+        wallpaper = [
+          
+        ];
+      };
+    };
+    
     wayland.windowManager.hyprland.enable = true;
     wayland.windowManager.hyprland.systemd.variables = [ "--all" ];
     wayland.windowManager.hyprland.settings = {
@@ -143,6 +166,7 @@
 
       dwindle = {
         preserve_split = true;
+        no_gaps_when_only = true;
       };
       
       bindm = [
@@ -212,7 +236,7 @@
         kb_layout = "us";
         kb_variant = "colemak";
         follow_mouse = 1;
-        sensitivity = -0.6;
+        sensitivity = -0.8;
         force_no_accel = true;
       };
       animations = {
