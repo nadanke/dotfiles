@@ -46,19 +46,35 @@
     tealdeer
     lxqt.lxqt-policykit
     dunst
-    wofi
     bat
     fd
     ripgrep
     wlr-randr
     jetbrains.webstorm
     wl-clipboard
+    cliphist
     cifs-utils
     nodejs_20
-    solaar
     dosfstools
     e2fsprogs
+    playerctl
+    openmw
+    godot_4
   ];
+
+  hardware.logitech.wireless = {
+    enable = true;
+    # solaar
+    enableGraphical = true;
+  };
+
+  programs.nix-ld = {
+    enable = true;
+    libraries = with pkgs; [
+      # add any missing dynamic libraries for unpackaged
+      # programs here, NOT in environment.systemPackages
+    ];
+  };
 
   programs.thunar = {
     enable = true;

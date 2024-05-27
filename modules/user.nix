@@ -5,16 +5,16 @@
         isNormalUser = true;
         description = "big shmingus";
         extraGroups = [ "networkmanager" "wheel" "docker" ];
-        packages = with pkgs; [];
+        packages = with pkgs; [
+          pavucontrol
+          mumble
+        ];
     };
 
     # Enable automatic login for the user.
     services.getty.autologinUser = "nadanke";
 
     home-manager.users.nadanke = { pkgs, ... }: {
-    home.packages = [
-      pkgs.pavucontrol
-    ];
     home.stateVersion = "23.11";
     programs.fish.enable = true;
     programs.fish.functions = {
@@ -34,6 +34,11 @@
       };
     };
 
+    programs.rofi = {
+      enable = true;
+      package = pkgs.rofi-wayland;
+      theme = "android_notification.rasi";
+    };
 
     programs.lsd = {
       enable = true;
@@ -153,6 +158,7 @@
         { id = "cjpalhdlnbpafiamejdnhcphjbkeiagm"; }
         { id = "ghmbeldphafepmbegfdlkpapadhbakde"; }
         { id = "jinjaccalgkegednnccohejagnlnfdag"; }
+        { id = "mnjggcdmjocbbbhaepdhchncahnbgone"; }
       ];
     };
 
@@ -181,6 +187,11 @@
         "lxqt-policykit-agent"
         "dunst"
         "waybar"
+        "wl-paste --type text --watch cliphist store"
+        "wl-paste --type image --watch cliphist store"
+        "steam"
+        "element-desktop"
+        "solaar"
       ];
 
       dwindle = {
@@ -200,6 +211,9 @@
       ];
       bindl = [
         ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+        ", XF86AudioPlay, exec, playerctl play-pause"
+        ", XF86AudioNext, exec, playerctl next"
+        ", XF86AudioPrev, exec, playerctl previous"
       ];
 
       bind =
@@ -210,7 +224,8 @@
           "$mod, m, exit,"
           "$mod, c, exec, thunar"
           "$mod, j, togglesplit,"
-          "$mod, s, exec, wofi --allow-images --show drun,run"
+          "$mod, s, exec, rofi -show drun -modes drun,run -show-icons"
+          "$mod, z, exec, cliphist list | rofi -dmenu | cliphist decode | wl-copy"
 
           "$mod, t, fullscreen"
 
@@ -259,7 +274,6 @@
         kb_layout = "us";
         kb_variant = "colemak";
         follow_mouse = 1;
-        sensitivity = -0.8;
         force_no_accel = true;
       };
       animations = {
