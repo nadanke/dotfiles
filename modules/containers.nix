@@ -14,4 +14,15 @@
             defaultNetwork.settings.dns_enabled = true;
         };
     };
+
+    environment.systemPackages = with pkgs; [
+        docker-compose
+    ];
+
+    users.users.nadanke = {
+            packages = with pkgs; [
+                podman-tui
+                dive
+            ];
+    };
 }

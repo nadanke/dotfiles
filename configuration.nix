@@ -19,6 +19,11 @@
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+  security.pam.services.kwallet = {
+    name = "kwallet";
+    enableKwallet = true;
+  };
+
   nix.settings.max-jobs = 32;
 
   chaotic.mesa-git.enable = true;
@@ -26,40 +31,15 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    fish
     helix
-    kdePackages.plasma-pa
-    gamescope
-    gamescope-wsi
     procs
     git
     lsd
-    slack
-    element-desktop
-    spotify
-    mpv
-    goverlay
-    mangohud
-    signal-desktop
-    docker-compose
-    podman-tui
-    dive
     tealdeer
-    lxqt.lxqt-policykit
-    dunst
     bat
     fd
     ripgrep
-    wlr-randr
-    jetbrains.webstorm
-    wl-clipboard
-    cliphist
-    cifs-utils
-    nodejs_20
-    dosfstools
-    e2fsprogs
-    playerctl
-    openmw
-    godot_4
   ];
 
   hardware.logitech.wireless = {

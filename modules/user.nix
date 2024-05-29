@@ -8,6 +8,31 @@
         packages = with pkgs; [
           pavucontrol
           mumble
+          bottom
+          slurp
+          grim
+          swappy
+          nmap
+          gamescope
+          gamescope-wsi
+          kdePackages.plasma-pa
+          element-desktop
+          spotify
+          mpv
+          goverlay
+          mangohud
+          signal-desktop
+          slack
+          lxqt.lxqt-policykit
+          dunst
+          wlr-randr
+          jetbrains.webstorm
+          wl-clipboard
+          cliphist
+          nodejs_20
+          playerctl
+          openmw
+          godot_4
         ];
     };
 
@@ -226,6 +251,7 @@
           "$mod, j, togglesplit,"
           "$mod, s, exec, rofi -show drun -modes drun,run -show-icons"
           "$mod, z, exec, cliphist list | rofi -dmenu | cliphist decode | wl-copy"
+          ''$mod SHIFT, s, exec, grim -g "$(slurp)" - | swappy -f -''
 
           "$mod, t, fullscreen"
 
@@ -283,7 +309,7 @@
         gaps_in = 0;
         gaps_out = 0;
 
-        allow_tearing = true;
+        #allow_tearing = true;
         layout = "dwindle";
 
         "col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
