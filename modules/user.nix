@@ -33,6 +33,11 @@
           playerctl
           openmw
           godot_4
+          gpu-screen-recorder
+          bottles
+          wezterm
+          ethtool
+          networkmanagerapplet
         ];
     };
 
@@ -40,47 +45,54 @@
     services.getty.autologinUser = "nadanke";
 
     home-manager.users.nadanke = { pkgs, ... }: {
-    home.stateVersion = "23.11";
-    programs.fish.enable = true;
-    programs.fish.functions = {
-      cat = "bat $argv";
-      codium-ext-up = "~/nixpkgs/pkgs/applications/editors/vscode/extensions/update_installed_exts.sh";
-    };
+      home.stateVersion = "23.11";
+      programs.obs-studio = {
+        enable = true;
+        plugins = [
+          pkgs.obs-studio-plugins.wlrobs
+        ];
+      };
+      programs.fish.enable = true;
+      programs.fish.functions = {
+        cat = "bat $argv";
+        codium-ext-up = "~/nixpkgs/pkgs/applications/editors/vscode/extensions/update_installed_exts.sh";
+        code = "codium $argv";
+      };
 
-    programs.git = {
-      enable = true;
-      userName = "Mario Bruestle";
-      userEmail = "mario.bruestle@pm.me";
-      extraConfig = {
-        color = {
-          ui = true;
-          pager = true;
+      programs.git = {
+        enable = true;
+        userName = "Mario Bruestle";
+        userEmail = "mario.bruestle@pm.me";
+        extraConfig = {
+          color = {
+            ui = true;
+            pager = true;
+          };
         };
       };
-    };
 
-    programs.rofi = {
-      enable = true;
-      package = pkgs.rofi-wayland;
-      theme = "android_notification.rasi";
-    };
+      programs.rofi = {
+        enable = true;
+        package = pkgs.rofi-wayland;
+        theme = "android_notification.rasi";
+      };
 
-    programs.lsd = {
-      enable = true;
-      enableAliases = true;
-    };
+      programs.lsd = {
+        enable = true;
+        enableAliases = true;
+      };
 
-    programs.zoxide = {
-      enable = true;
-      enableFishIntegration = true;
-    };
+      programs.zoxide = {
+        enable = true;
+        enableFishIntegration = true;
+      };
 
-    programs.waybar = {
-      enable = true;
-      settings = {
-        mainBar = {
-          layer = "top";
-          position = "bottom";
+      programs.waybar = {
+        enable = true;
+        settings = {
+          mainBar = {
+            layer = "top";
+            position = "bottom";
           modules-left = [ "hyprland/workspaces" ];
           modules-center = [ "hyprland/window" ];
           modules-right = [ "load" "wireplumber" "clock" "tray" ];
@@ -305,7 +317,14 @@
       animations = {
         enabled = false;
       };
+
+#      cursor = {
+#        inactive_timeout = 5;
+#      };
+      
       general = {
+        cursor_inactive_timeout = 5;
+        
         gaps_in = 0;
         gaps_out = 0;
 

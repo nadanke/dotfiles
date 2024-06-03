@@ -19,6 +19,17 @@
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+  security.wrappers = {
+    gsr-kms-server = {
+      owner = "root";
+      group = "root";
+      capabilities = "cap_sys_admin+ep";
+      source = "${pkgs.gpu-screen-recorder}/bin/gsr-kms-server";
+    };
+  };
+
+  programs.appimage.enable = true;
+
   security.pam.services.kwallet = {
     name = "kwallet";
     enableKwallet = true;
@@ -31,7 +42,6 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    fish
     helix
     procs
     git
