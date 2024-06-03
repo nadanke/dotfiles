@@ -38,6 +38,7 @@
           wezterm
           ethtool
           networkmanagerapplet
+          neovim
         ];
     };
 
