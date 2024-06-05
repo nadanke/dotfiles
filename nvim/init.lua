@@ -174,7 +174,7 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 -- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
 -- or just use <C-\><C-n> to exit terminal mode
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
-vim.keymap.set('n', '<leader>t', ':sp term://fish | startinsert<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader><CR>', ':20sp term://fish | startinsert<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<leader>e', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
 
 vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
@@ -587,6 +587,8 @@ require('lazy').setup({
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
+        tsserver = {},
+        zls = {},
         -- clangd = {},
         -- gopls = {},
         -- pyright = {},
