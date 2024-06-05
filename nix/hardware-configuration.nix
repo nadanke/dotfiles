@@ -21,6 +21,11 @@
 
   boot.initrd.luks.devices."luks-c377f555-3282-4fdb-9d76-832a23244a73".device = "/dev/disk/by-uuid/c377f555-3282-4fdb-9d76-832a23244a73";
 
+  programs.corectrl = {
+    enable = true;
+    gpuOverclock.enable = true;
+  };
+
   fileSystems."/boot" =
     { device = "/dev/disk/by-uuid/D90B-8666";
       fsType = "vfat";

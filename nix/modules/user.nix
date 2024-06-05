@@ -39,6 +39,7 @@
           ethtool
           networkmanagerapplet
           neovim
+          zig
         ];
     };
 

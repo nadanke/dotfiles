@@ -37,7 +37,7 @@
 
   nix.settings.max-jobs = 32;
 
-  chaotic.mesa-git.enable = true;
+#  chaotic.mesa-git.enable = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
