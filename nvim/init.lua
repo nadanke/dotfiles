@@ -176,6 +176,8 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 vim.keymap.set('n', '<leader><CR>', ':20sp term://fish | startinsert<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<leader>e', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<Tab>', ':bn<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<C-Tab>', ':bp<CR>', { noremap = true, silent = true })
 
 vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
   pattern = "term://*",
@@ -224,6 +226,15 @@ if not vim.loop.fs_stat(lazypath) then
 end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
+
+
+
+vim.o.autoindent = true
+vim.o.smartindent = true
+vim.o.tabstop = 2
+vim.o.shiftwidth = 2
+vim.o.expandtab = false
+
 -- [[ Configure and install plugins ]]
 --
 --  To check the current status of your plugins, run
@@ -238,6 +249,24 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
+  {
+    'akinsho/bufferline.nvim',
+    config = function()
+      vim.opt.termguicolors = true
+      require('bufferline').setup {}
+    end
+  },
+  {
+    'smoka7/hop.nvim',
+    version = "*",
+    config = function()
+      local hop = require('hop')
+      hop.setup({
+        keys = 'netsiroahuywf'
+      })
+      vim.keymap.set('', 'f', ':HopChar1<CR>', { remap = true })
+    end,
+  },
   {
     'nvim-tree/nvim-tree.lua',
     version = "*",
@@ -589,6 +618,7 @@ require('lazy').setup({
       local servers = {
         tsserver = {},
         zls = {},
+        hls = {},
         -- clangd = {},
         -- gopls = {},
         -- pyright = {},
