@@ -39,7 +39,10 @@
           ethtool
           networkmanagerapplet
           neovim
-          zig
+          ghc
+          haskell-language-server
+          stack
+          distrobox
         ];
     };
 

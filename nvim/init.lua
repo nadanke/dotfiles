@@ -179,9 +179,9 @@ vim.keymap.set('n', '<leader>e', ':NvimTreeToggle<CR>', { noremap = true, silent
 vim.keymap.set('n', '<Tab>', ':bn<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<C-Tab>', ':bp<CR>', { noremap = true, silent = true })
 
-vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
-  pattern = "term://*",
-  command = "startinsert"
+vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWinEnter' }, {
+  pattern = 'term://*',
+  command = 'startinsert',
 })
 
 -- TIP: Disable arrow keys in normal mode
@@ -226,9 +226,6 @@ if not vim.loop.fs_stat(lazypath) then
 end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
-
-
-
 vim.o.autoindent = true
 vim.o.smartindent = true
 vim.o.tabstop = 2
@@ -249,33 +246,48 @@ vim.o.expandtab = false
 require('lazy').setup({
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
+  'mg979/vim-visual-multi',
+  {
+    'echasnovski/mini.starter',
+    version = '*',
+    config = function()
+      require('mini.starter').setup()
+    end,
+  },
+  {
+    'echasnovski/mini.map',
+    version = '*',
+    config = function()
+      require('mini.map').setup()
+    end,
+  },
   {
     'akinsho/bufferline.nvim',
     config = function()
       vim.opt.termguicolors = true
       require('bufferline').setup {}
-    end
+    end,
   },
   {
     'smoka7/hop.nvim',
-    version = "*",
+    version = '*',
     config = function()
-      local hop = require('hop')
-      hop.setup({
-        keys = 'netsiroahuywf'
-      })
+      local hop = require 'hop'
+      hop.setup {
+        keys = 'netsiroahuywf',
+      }
       vim.keymap.set('', 'f', ':HopChar1<CR>', { remap = true })
     end,
   },
   {
     'nvim-tree/nvim-tree.lua',
-    version = "*",
+    version = '*',
     lazy = false,
     dependencies = {
-      "nvim-tree/nvim-web-devicons",
+      'nvim-tree/nvim-web-devicons',
     },
     config = function()
-      require("nvim-tree").setup {}
+      require('nvim-tree').setup {}
     end,
   },
 
@@ -289,7 +301,7 @@ require('lazy').setup({
   --    require('Comment').setup({})
 
   -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim',    opts = {} },
+  { 'numToStr/Comment.nvim', opts = {} },
 
   -- Here is a more advanced example where we pass configuration
   -- options to `gitsigns.nvim`. This is equivalent to the following Lua:
@@ -324,7 +336,7 @@ require('lazy').setup({
   -- after the plugin has been loaded:
   --  config = function() ... end
 
-  {                     -- Useful plugin to show you pending keybinds.
+  { -- Useful plugin to show you pending keybinds.
     'folke/which-key.nvim',
     event = 'VimEnter', -- Sets the loading event to 'VimEnter'
     config = function() -- This is the function that runs, AFTER loading
@@ -376,7 +388,7 @@ require('lazy').setup({
       { 'nvim-telescope/telescope-ui-select.nvim' },
 
       -- Useful for getting pretty icons, but requires a Nerd Font.
-      { 'nvim-tree/nvim-web-devicons',            enabled = vim.g.have_nerd_font },
+      { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
     },
     config = function()
       -- Telescope is a fuzzy finder that comes with a lot of different things that
@@ -469,11 +481,11 @@ require('lazy').setup({
 
       -- Useful status updates for LSP.
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { 'j-hui/fidget.nvim',       opts = {} },
+      { 'j-hui/fidget.nvim', opts = {} },
 
       -- `neodev` configures Lua LSP for your Neovim config, runtime and plugins
       -- used for completion, annotations and signatures of Neovim apis
-      { 'folke/neodev.nvim',       opts = {} },
+      { 'folke/neodev.nvim', opts = {} },
     },
     config = function()
       -- Brief aside: **What is LSP?**
@@ -962,5 +974,14 @@ require('lazy').setup({
   },
 })
 
+vim.cmd [[ autocmd TermOpen * setlocal nobuflisted ]]
+
+-- vim.api.nvim_create_autocmd("VimLeave", {
+--   pattern = "*",
+--   callback = function ()
+--     vim.cmd('mksession! ' .. session_file)
+--   end
+-- })
+--
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et

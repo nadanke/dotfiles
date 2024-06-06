@@ -50,6 +50,12 @@
     bat
     fd
     ripgrep
+    unzip
+    gcc
+    clang
+    gnumake
+    ncurses
+    gdu
   ];
 
   hardware.logitech.wireless = {
