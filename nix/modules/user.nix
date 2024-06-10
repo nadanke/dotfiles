@@ -43,6 +43,7 @@
           haskell-language-server
           stack
           distrobox
+          stremio
         ];
     };
 
@@ -62,6 +63,7 @@
         cat = "bat $argv";
         codium-ext-up = "~/nixpkgs/pkgs/applications/editors/vscode/extensions/update_installed_exts.sh";
         code = "codium $argv";
+        msync = "rsync -avh --progress $argv";
       };
 
       programs.git = {

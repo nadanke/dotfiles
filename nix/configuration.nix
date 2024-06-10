@@ -56,6 +56,7 @@
     gnumake
     ncurses
     gdu
+    killall
   ];
 
   hardware.logitech.wireless = {

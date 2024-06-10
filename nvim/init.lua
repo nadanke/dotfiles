@@ -39,6 +39,10 @@ vim.keymap.set('n', '<Tab>', ':bn<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<C-Tab>', ':bp<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<leader>n', '<cmd>lua vim.lsp.buf.hover()<CR>', { desc = 'Show [N]eovim LSP hover', noremap = true, silent = true })
 
+vim.keymap.set('n', '<C-S-n>', ':Telescope find_files<CR>', { desc = 'Find files' })
+vim.keymap.set('n', '<C-S-g>', ':Telescope live_grep<CR>', { desc = 'Live grep' })
+vim.keymap.set('n', '<C-S-b>', ':Telescope buffers<CR>', { desc = 'Find buffers' })
+
 vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWinEnter' }, {
   pattern = 'term://*',
   command = 'startinsert',
@@ -82,6 +86,10 @@ require('lazy').setup({
   'mg979/vim-visual-multi',
   'github/copilot.vim',
   'nvim-treesitter/nvim-treesitter-context',
+  'hrsh7th/cmp-buffer',
+  'hrsh7th/cmp-nvim-lua',
+  'hrsh7th/cmp-cmdline',
+  'tpope/vim-fugitive',
   {
     'windwp/nvim-autopairs',
     event = 'InsertEnter',
@@ -89,17 +97,33 @@ require('lazy').setup({
   },
   'windwp/nvim-ts-autotag',
   {
-    'echasnovski/mini.starter',
-    version = '*',
+    'folke/trouble.nvim',
     config = function()
-      require('mini.starter').setup()
+      require('trouble').setup {}
     end,
   },
   {
-    'echasnovski/mini.map',
-    version = '*',
+    'akinsho/toggleterm.nvim',
     config = function()
-      require('mini.map').setup()
+      require('toggleterm').setup {}
+    end,
+  },
+  {
+    'rafamadriz/friendly-snippets',
+    config = function()
+      require('luasnip.loaders.from_vscode').lazy_load()
+    end,
+  },
+  {
+    'nvim-lualine/lualine.nvim',
+    config = function()
+      require('lualine').setup {
+        options = {
+          theme = 'tokyonight',
+          section_separators = '',
+          component_separators = '',
+        },
+      }
     end,
   },
   {
@@ -118,6 +142,9 @@ require('lazy').setup({
         keys = 'netsiroahuywf',
       }
       vim.keymap.set('', 'f', ':HopChar1<CR>', { remap = true })
+      vim.keymap.set('v', 'f', '<cmd>HopChar1<CR>', { remap = true })
+      vim.keymap.set('', 'F', ':HopWord<CR>', { remap = true })
+      vim.keymap.set('v', 'F', '<cmd>HopWord<CR>', { remap = true })
     end,
   },
   {
@@ -277,6 +304,7 @@ require('lazy').setup({
         tsserver = {},
         zls = {},
         hls = {},
+        svelte = {},
         lua_ls = {
           settings = {
             Lua = {
@@ -400,11 +428,13 @@ require('lazy').setup({
     config = function()
       require('mini.ai').setup { n_lines = 500 }
       require('mini.surround').setup()
-      local statusline = require 'mini.statusline'
-      statusline.setup { use_icons = vim.g.have_nerd_font }
-      statusline.section_location = function()
-        return '%2l:%-2v'
-      end
+      require('mini.starter').setup()
+      require('mini.map').setup()
+      -- local statusline = require 'mini.statusline'
+      -- statusline.setup { use_icons = vim.g.have_nerd_font }
+      -- statusline.section_location = function()
+      --   return '%2l:%-2v'
+      -- end
     end,
   },
   {
