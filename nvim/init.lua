@@ -37,6 +37,7 @@ vim.keymap.set('n', '<leader><CR>', ':20sp term://fish | startinsert<CR>', { nor
 vim.keymap.set('n', '<leader>e', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<Tab>', ':bn<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<C-Tab>', ':bp<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>n', '<cmd>lua vim.lsp.buf.hover()<CR>', { desc = 'Show [N]eovim LSP hover', noremap = true, silent = true })
 
 vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWinEnter' }, {
   pattern = 'term://*',
@@ -81,6 +82,12 @@ require('lazy').setup({
   'mg979/vim-visual-multi',
   'github/copilot.vim',
   'nvim-treesitter/nvim-treesitter-context',
+  {
+    'windwp/nvim-autopairs',
+    event = 'InsertEnter',
+    config = true,
+  },
+  'windwp/nvim-ts-autotag',
   {
     'echasnovski/mini.starter',
     version = '*',
