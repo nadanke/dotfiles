@@ -89,13 +89,16 @@ require('lazy').setup({
   'hrsh7th/cmp-buffer',
   'hrsh7th/cmp-nvim-lua',
   'hrsh7th/cmp-cmdline',
-  'tpope/vim-fugitive',
   {
     'windwp/nvim-autopairs',
     event = 'InsertEnter',
     config = true,
   },
   'windwp/nvim-ts-autotag',
+  {
+    'bwpge/homekey.nvim',
+    opts = {},
+  },
   {
     'folke/trouble.nvim',
     config = function()
