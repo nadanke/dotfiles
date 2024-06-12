@@ -438,6 +438,7 @@ require('lazy').setup({
       require('mini.surround').setup()
       require('mini.starter').setup()
       require('mini.map').setup()
+      require('mini.sessions').setup()
       -- local statusline = require 'mini.statusline'
       -- statusline.setup { use_icons = vim.g.have_nerd_font }
       -- statusline.section_location = function()

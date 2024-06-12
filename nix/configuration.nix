@@ -57,6 +57,7 @@
     ncurses
     gdu
     killall
+    libnotify
   ];
 
   hardware.logitech.wireless = {

@@ -122,6 +122,49 @@
         };
       };
     };
+
+    home.sessionPath = [
+      "$HOME/.local/bin"
+    ];
+
+    home.file.toggleRecording = {
+      enable = true;
+      target = ".local/bin/toggle-recording.fish";
+      executable = true;
+      text = ''
+        #!/usr/bin/env fish
+        set is_running (pgrep -f gpu-screen-recorder)
+
+        if test -z "$is_running"
+          # No running instance, start it
+          gpu-screen-recorder -w DP-1 -f 60 -a (pactl get-default-sink).monitor -a (pactl get-default-source) -r 120 -k av1 -o ~/Videos/ -c mp4 &
+          notify-send "GPU Screen Recorder" "Recording started."
+        else
+          # Running instance, stop it
+          killall -SIGINT gpu-screen-recorder
+          notify-send "GPU Screen Recorder" "Recording stopped."
+        end
+      '';
+    };
+
+    home.file.saveRecording = {
+      enable = true;
+      target = ".local/bin/save-recording.fish";
+      executable = true;
+      text = ''
+        #!/usr/bin/env fish
+        set is_running (pgrep -f gpu-screen-recorder)
+
+        if test -z "$is_running"
+          notify-send "GPU Screen Recorder" "No recording running."
+          exit 1
+        end
+
+        killall -SIGUSR1 gpu-screen-recorder
+        notify-send "GPU Screen Recorder" "Recording saved."
+      '';
+    };
+
     home.file.waybarStyles = {
       enable = true;
       target = ".config/waybar/style.css";
@@ -275,6 +318,8 @@
           "$mod, s, exec, rofi -show drun -modes drun,run -show-icons"
           "$mod, z, exec, cliphist list | rofi -dmenu | cliphist decode | wl-copy"
           ''$mod SHIFT, s, exec, grim -g "$(slurp)" - | swappy -f -''
+          "$mod SHIFT, F11, exec, ~/.local/bin/toggle-recording.fish"
+          "$mod SHIFT, F12, exec, ~/.local/bin/save-recording.fish"
 
           "$mod, t, fullscreen"
 
@@ -288,7 +333,6 @@
           "$mod, u, movefocus, u"
           "$mod, e, movefocus, d"
 
-          
           "$mod SHIFT, left, movewindow, l"
           "$mod SHIFT, right, movewindow, r"
           "$mod SHIFT, up, movewindow, u"
