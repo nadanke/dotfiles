@@ -44,6 +44,10 @@
           stack
           distrobox
           stremio
+          krita
+          pinta
+          gimp
+          imv
         ];
     };
 
