@@ -24,7 +24,6 @@
           signal-desktop
           slack
           lxqt.lxqt-policykit
-          dunst
           wlr-randr
           jetbrains.webstorm
           wl-clipboard
@@ -82,10 +81,61 @@
         };
       };
 
+      programs.starship = {
+        enable = true;
+        enableFishIntegration = true;
+      };
+
+      programs.hyprlock = {
+        enable = true;
+      };
+
       programs.rofi = {
         enable = true;
         package = pkgs.rofi-wayland;
         theme = "android_notification.rasi";
+      };
+
+      services.swaync = {
+        enable = true;
+        settings = {
+          positionX = "right";
+          positionY = "right";
+          control-center-positionX = "none";
+          control-center-positionY = "none";
+          control-center-margin-top = 8;
+          control-center-margin-bottom = 8;
+          control-center-margin-right = 8;
+          control-center-margin-left = 8;
+          control-center-width = 500;
+          control-center-height = 600;
+          fit-to-screen = true;
+
+          layer-shell = true;
+          layer = "overlay";
+          control-center-layer = "overlay";
+          cssPriority = "user";
+          notification-icon-size = 64;
+          notification-body-image-height = 100;
+          notification-body-image-width = 200;
+          notification-inline-replies = true;
+          timeout = 10;
+          timeout-low = 5;
+          timeout-critical = 0;
+          notification-window-width = 500;
+          keyboard-shortcuts = true;
+          image-visibility = "always";
+          transition-time = 200;
+          hide-on-clear = true;
+          hide-on-action = true;
+          script-fail-notify = true;
+        };
+
+        style = ''
+          .control-center {
+            background: rgba(46, 46, 46, 1);
+          }
+        '';
       };
 
       programs.lsd = {
@@ -137,11 +187,11 @@
 
         if test -z "$is_running"
           # No running instance, start it
-          gpu-screen-recorder -w DP-1 -f 60 -a (pactl get-default-sink).monitor -a (pactl get-default-source) -r 120 -k av1 -o ~/Videos/ -c mp4 &
+          gpu-screen-recorder -w DP-1 -f 60 -a (pactl get-default-sink).monitor -a (pactl get-default-source) -r 120 -k h265 -o ~/Videos/ -c mp4 &
           notify-send "GPU Screen Recorder" "Recording started."
         else
           # Running instance, stop it
-          killall -SIGINT gpu-screen-recorder
+          pkill -f gpu-screen-recorder
           notify-send "GPU Screen Recorder" "Recording stopped."
         end
       '';
@@ -257,9 +307,11 @@
       enable = true;
       settings = {
         splash = false;
-        preload = [ ];
+        preload = [ "/home/nadanke/dotfiles/nix/modules/wp.jpg" ];
         wallpaper = [
-          
+          "DP-1,/home/nadanke/dotfiles/nix/modules/wp.jpg"
+          "HDMI-A-2,/home/nadanke/dotfiles/nix/modules/wp.jpg"
+          "HDMI-A-1,/home/nadanke/dotfiles/nix/modules/wp.jpg"
         ];
       };
     };
@@ -276,7 +328,6 @@
       ];
       exec-once = [
         "lxqt-policykit-agent"
-        "dunst"
         "waybar"
         "wl-paste --type text --watch cliphist store"
         "wl-paste --type image --watch cliphist store"
@@ -347,6 +398,7 @@
           "$mod, mouse_up, workspace, e-1"
 
           "$mod, v, togglefloating,"
+          ", XF86Launch6, exec, swaync-client -t -sw"
         ]
         ++ (
           builtins.concatLists (builtins.genList (
