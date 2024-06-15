@@ -67,6 +67,7 @@
         codium-ext-up = "~/nixpkgs/pkgs/applications/editors/vscode/extensions/update_installed_exts.sh";
         code = "codium $argv";
         msync = "rsync -avh --progress $argv";
+        fuckplasma = "procs --no-header --only PID kwin_wayland_wrapper | xargs kill -9";
       };
 
       programs.git = {
@@ -177,6 +178,12 @@
       "$HOME/.local/bin"
     ];
 
+    home.file.wallpaper = {
+      enable = true;
+      source = ./wp.jpg;
+      target = ".wallpaper/wp.jpg";
+    };
+
     home.file.toggleRecording = {
       enable = true;
       target = ".local/bin/toggle-recording.fish";
@@ -187,7 +194,7 @@
 
         if test -z "$is_running"
           # No running instance, start it
-          gpu-screen-recorder -w DP-1 -f 60 -a (pactl get-default-sink).monitor -a (pactl get-default-source) -r 120 -k h265 -o ~/Videos/ -c mp4 &
+          sh -c 'gpu-screen-recorder -w DP-1 -f 60 -a "$(pactl get-default-sink).monitor|$(pactl get-default-source)" -r 120 -k h265 -o ~/Videos/ -c mp4' &
           notify-send "GPU Screen Recorder" "Recording started."
         else
           # Running instance, stop it
@@ -307,11 +314,11 @@
       enable = true;
       settings = {
         splash = false;
-        preload = [ "/home/nadanke/dotfiles/nix/modules/wp.jpg" ];
+        preload = [ "/home/nadanke/.wallpaper/wp.jpg" ];
         wallpaper = [
-          "DP-1,/home/nadanke/dotfiles/nix/modules/wp.jpg"
-          "HDMI-A-2,/home/nadanke/dotfiles/nix/modules/wp.jpg"
-          "HDMI-A-1,/home/nadanke/dotfiles/nix/modules/wp.jpg"
+          "DP-1,/home/nadanke/.wallpaper/wp.jpg"
+          "HDMI-A-2,/home/nadanke/.wallpaper/wp.jpg"
+          "HDMI-A-1,/home/nadanke/.wallpaper/wp.jpg"
         ];
       };
     };
@@ -371,6 +378,9 @@
           ''$mod SHIFT, s, exec, grim -g "$(slurp)" - | swappy -f -''
           "$mod SHIFT, F11, exec, ~/.local/bin/toggle-recording.fish"
           "$mod SHIFT, F12, exec, ~/.local/bin/save-recording.fish"
+
+          ", Print, exec, playerctl -p spotify volume 0.05-"
+          ", Scroll_Lock, exec, playerctl -p spotify volume 0.05+"
 
           "$mod, t, fullscreen"
 
