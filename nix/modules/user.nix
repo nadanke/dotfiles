@@ -38,9 +38,6 @@
           ethtool
           networkmanagerapplet
           neovim
-          ghc
-          haskell-language-server
-          stack
           distrobox
           stremio
           krita
@@ -55,46 +52,115 @@
 
     home-manager.users.nadanke = { pkgs, ... }: {
       home.stateVersion = "23.11";
-      programs.obs-studio = {
-        enable = true;
-        plugins = [
-          pkgs.obs-studio-plugins.wlrobs
-        ];
-      };
-      programs.fish.enable = true;
-      programs.fish.functions = {
-        cat = "bat $argv";
-        codium-ext-up = "~/nixpkgs/pkgs/applications/editors/vscode/extensions/update_installed_exts.sh";
-        code = "codium $argv";
-        msync = "rsync -avh --progress $argv";
-        fuckplasma = "procs --no-header --only PID kwin_wayland_wrapper | xargs kill -9";
-      };
 
-      programs.git = {
-        enable = true;
-        userName = "Mario Bruestle";
-        userEmail = "mario.bruestle@pm.me";
-        extraConfig = {
-          color = {
-            ui = true;
-            pager = true;
+      programs = {
+        obs-studio = {
+          enable = true;
+          plugins = [
+            pkgs.obs-studio-plugins.wlrobs
+          ];
+        };
+
+        fish = {
+          enable = true;
+          functions = {
+            cat = "bat $argv";
+            codium-ext-up = "~/nixpkgs/pkgs/applications/editors/vscode/extensions/update_installed_exts.sh";
+            code = "codium $argv";
+            msync = "rsync -avh --progress $argv";
+            fuckplasma = "procs --no-header --only PID kwin_wayland_wrapper | xargs kill -9";
           };
         };
-      };
 
-      programs.starship = {
-        enable = true;
-        enableFishIntegration = true;
-      };
+        git = {
+          enable = true;
+          userName = "Mario Bruestle";
+          userEmail = "mario.bruestle@pm.me";
+          extraConfig = {
+            color = {
+              ui = true;
+              pager = true;
+            };
+          };
+        };
 
-      programs.hyprlock = {
-        enable = true;
-      };
+        starship = {
+          enable = true;
+          enableFishIntegration = true;
+        };
 
-      programs.rofi = {
-        enable = true;
-        package = pkgs.rofi-wayland;
-        theme = "android_notification.rasi";
+        hyprlock.enable = true;
+
+        rofi = {
+          enable = true;
+          package = pkgs.rofi-wayland;
+          theme = "android_notification.rasi";
+        };
+
+        lsd = {
+          enable = true;
+          enableAliases = true;
+        };
+
+        zoxide = {
+          enable = true;
+          enableFishIntegration = true;
+        };
+
+        waybar = {
+          enable = true;
+          settings = {
+            mainBar = {
+              layer = "top";
+              position = "bottom";
+              modules-left = [ "hyprland/workspaces" ];
+              modules-center = [ "hyprland/window" ];
+              modules-right = [ "load" "wireplumber" "clock" "tray" ];
+              output = [
+                "DP-1"
+                "HDMI-A-2"
+              ];
+              spacing = 8;
+              height = 26;
+              tray = {
+                spacing = 4;
+              };
+              wireplumber = {
+                on-click = "pavucontrol";
+              };
+            };
+          };
+        };
+
+        alacritty = {
+          enable = true;
+          settings = {
+            shell = "fish";
+            window = {
+              padding = {
+                x = 10;
+                y = 10;
+              };
+            };
+            font = {
+              normal = {
+                family = "JetBrains Mono";
+                style = "Regular";
+              };
+            };
+          };
+        };
+
+        chromium = {
+          enable = true;
+          package = pkgs.brave;
+          extensions = [
+            { id = "cjpalhdlnbpafiamejdnhcphjbkeiagm"; }
+            { id = "ghmbeldphafepmbegfdlkpapadhbakde"; }
+            { id = "jinjaccalgkegednnccohejagnlnfdag"; }
+            { id = "mnjggcdmjocbbbhaepdhchncahnbgone"; }
+          ];
+        };
       };
 
       services.swaync = {
@@ -139,142 +205,91 @@
         '';
       };
 
-      programs.lsd = {
-        enable = true;
-        enableAliases = true;
-      };
-
-      programs.zoxide = {
-        enable = true;
-        enableFishIntegration = true;
-      };
-
-      programs.waybar = {
-        enable = true;
-        settings = {
-          mainBar = {
-            layer = "top";
-            position = "bottom";
-          modules-left = [ "hyprland/workspaces" ];
-          modules-center = [ "hyprland/window" ];
-          modules-right = [ "load" "wireplumber" "clock" "tray" ];
-          output = [
-            "DP-1"
-            "HDMI-A-2"
-          ];
-          spacing = 8;
-          height = 26;
-          tray = {
-            spacing = 4;
-          };
-          wireplumber = {
-            on-click = "pavucontrol";
-          };
-        };
-      };
-    };
 
     home.sessionPath = [
       "$HOME/.local/bin"
     ];
 
-    home.file.wallpaper = {
-      enable = true;
-      source = ./wp.jpg;
-      target = ".wallpaper/wp.jpg";
-    };
+    home.file = {
+      wallpaper = {
+        enable = true;
+        source = ./wp.jpg;
+        target = ".wallpaper/wp.jpg";
+      };
 
-    home.file.toggleRecording = {
-      enable = true;
-      target = ".local/bin/toggle-recording.fish";
-      executable = true;
-      text = ''
-        #!/usr/bin/env fish
-        set is_running (pgrep -f gpu-screen-recorder)
+      toggleRecording = {
+        enable = true;
+        target = ".local/bin/toggle-recording.fish";
+        executable = true;
+        text = ''
+          #!/usr/bin/env fish
+          set is_running (pgrep -f gpu-screen-recorder)
 
-        if test -z "$is_running"
-          # No running instance, start it
-          sh -c 'gpu-screen-recorder -w DP-1 -f 60 -a "$(pactl get-default-sink).monitor|$(pactl get-default-source)" -r 120 -k h265 -o ~/Videos/ -c mp4' &
-          notify-send "GPU Screen Recorder" "Recording started."
-        else
-          # Running instance, stop it
-          pkill -f gpu-screen-recorder
-          notify-send "GPU Screen Recorder" "Recording stopped."
-        end
-      '';
-    };
+          if test -z "$is_running"
+            # No running instance, start it
+            sh -c 'gpu-screen-recorder -w DP-1 -f 60 -a "$(pactl get-default-sink).monitor|$(pactl get-default-source)" -r 120 -k h265 -o ~/Videos/ -c mp4' &
+            notify-send "GPU Screen Recorder" "Recording started."
+          else
+            # Running instance, stop it
+            pkill -f gpu-screen-recorder
+            notify-send "GPU Screen Recorder" "Recording stopped."
+          end
+        '';
+      };
 
-    home.file.saveRecording = {
-      enable = true;
-      target = ".local/bin/save-recording.fish";
-      executable = true;
-      text = ''
-        #!/usr/bin/env fish
-        set is_running (pgrep -f gpu-screen-recorder)
+      saveRecording = {
+        enable = true;
+        target = ".local/bin/save-recording.fish";
+        executable = true;
+        text = ''
+          #!/usr/bin/env fish
+          set is_running (pgrep -f gpu-screen-recorder)
 
-        if test -z "$is_running"
-          notify-send "GPU Screen Recorder" "No recording running."
-          exit 1
-        end
+          if test -z "$is_running"
+            notify-send "GPU Screen Recorder" "No recording running."
+            exit 1
+          end
 
-        killall -SIGUSR1 gpu-screen-recorder
-        notify-send "GPU Screen Recorder" "Recording saved."
-      '';
-    };
+          killall -SIGUSR1 gpu-screen-recorder
+          notify-send "GPU Screen Recorder" "Recording saved."
+        '';
+      };
 
-    home.file.waybarStyles = {
-      enable = true;
-      target = ".config/waybar/style.css";
-      text = ''
-        * {
-          font-family: Inter;
-        }
-      
-        #workspaces button.active {
-          background: rgba(123,39,211,0.4);
-          border-radius: 0;
-        }
+      waybarStyles = {
+        enable = true;
+        target = ".config/waybar/style.css";
+        text = ''
+          * {
+            font-family: Inter;
+          }
+        
+          #workspaces button.active {
+            background: rgba(123,39,211,0.4);
+            border-radius: 0;
+          }
 
-        window#waybar {
-          background: rgba(93, 123, 81, 0.4);
-        }
+          window#waybar {
+            background: rgba(93, 123, 81, 0.4);
+          }
 
-        #clock, #tray {
-          padding-right: 8px;
-        }
+          #clock, #tray {
+            padding-right: 8px;
+          }
 
-        #workspaces,
-        #workspaces * {
-          padding: 0;
-          margin: 0;
-        }
+          #workspaces,
+          #workspaces * {
+            padding: 0;
+            margin: 0;
+          }
 
-        #workspaces button {
-          padding-left: 5px;
-          padding-right: 5px;
-        }
-      '';
-    };
-    
-
-    programs.alacritty = {
-      enable = true;
-      settings = {
-        shell = "fish";
-        window = {
-          padding = {
-            x = 10;
-            y = 10;
-          };
-        };
-        font = {
-          normal = {
-            family = "JetBrains Mono";
-            style = "Regular";
-          };
-        };
+          #workspaces button {
+            padding-left: 5px;
+            padding-right: 5px;
+          }
+        '';
       };
     };
+
 
     home.pointerCursor = {
       gtk.enable = true;
@@ -298,16 +313,6 @@
     dconf = {
       enable = true;
       settings."org/gnome/desktop/interface".color-scheme = "prefer-dark";
-    };
-    programs.chromium = {
-      enable = true;
-      package = pkgs.brave;
-      extensions = [
-        { id = "cjpalhdlnbpafiamejdnhcphjbkeiagm"; }
-        { id = "ghmbeldphafepmbegfdlkpapadhbakde"; }
-        { id = "jinjaccalgkegednnccohejagnlnfdag"; }
-        { id = "mnjggcdmjocbbbhaepdhchncahnbgone"; }
-      ];
     };
 
     services.hyprpaper = {
