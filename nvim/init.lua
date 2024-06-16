@@ -94,7 +94,11 @@ require('lazy').setup({
     event = 'InsertEnter',
     config = true,
   },
-  'windwp/nvim-ts-autotag',
+  {
+    'windwp/nvim-ts-autotag',
+    event = { 'BufReadPre', 'BufNewFile' },
+    opts = {},
+  },
   {
     'bwpge/homekey.nvim',
     opts = {},
