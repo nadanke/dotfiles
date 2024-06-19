@@ -34,7 +34,7 @@ vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagn
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 vim.keymap.set('n', '<leader><CR>', ':20sp term://fish | startinsert<CR>', { noremap = true, silent = true })
-vim.keymap.set('n', '<leader>e', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>a', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<Tab>', ':bn<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<C-Tab>', ':bp<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<leader>n', '<cmd>lua vim.lsp.buf.hover()<CR>', { desc = 'Show [N]eovim LSP hover', noremap = true, silent = true })
