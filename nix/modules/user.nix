@@ -18,6 +18,7 @@
           kdePackages.plasma-pa
           element-desktop
           spotify
+          losslesscut-bin
           mpv
           goverlay
           mangohud
