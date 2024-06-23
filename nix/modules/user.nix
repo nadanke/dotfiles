@@ -45,6 +45,9 @@
           pinta
           gimp
           imv
+          dbgate
+          postgresql
+          pgadmin4-desktopmode
         ];
     };
 
@@ -53,6 +56,82 @@
 
     home-manager.users.nadanke = { pkgs, ... }: {
       home.stateVersion = "23.11";
+
+      wayland.windowManager.river = {
+        enable = true;
+        extraConfig = ''
+          riverctl map normal Super Return spawn alacritty
+          riverctl map normal Super Q close
+          riverctl map normal Super M exit
+          riverctl map normal Super X spawn brave
+          riverctl map normal Super C spawn thunar
+          riverctl map normal Super N focus-view next
+          riverctl map normal Super E focus-view previous
+          riverctl map normal Super+Shift N swap next
+          riverctl map normal Super+Shift E swap previous
+
+          riverctl map-pointer normal Super BTN_LEFT move-view
+          riverctl map-pointer normal Super BTN_RIGHT resize-view
+          riverctl map-pointer normal Super BTN_MIDDLE toggle-float
+
+          for i in $(seq 1 9)
+          do
+              tags=$((1 << ($i - 1)))
+
+              # Super+[1-9] to focus tag [0-8]
+              riverctl map normal Super $i set-focused-tags $tags
+
+              # Super+Shift+[1-9] to tag focused view with tag [0-8]
+              riverctl map normal Super+Shift $i set-view-tags $tags
+
+              # Super+Control+[1-9] to toggle focus of tag [0-8]
+              riverctl map normal Super+Control $i toggle-focused-tags $tags
+
+              # Super+Shift+Control+[1-9] to toggle tag [0-8] of focused view
+              riverctl map normal Super+Shift+Control $i toggle-view-tags $tags
+          done
+
+          all_tags=$(((1 << 32) - 1))
+          riverctl map normal Super 0 set-focused-tags $all_tags
+          riverctl map normal Super+Shift 0 set-view-tags $all_tags
+          riverctl map normal Super S spawn 'rofi -show drun -modes drun,run -show-icons'
+
+          riverctl map normal Super Backspace zoom
+
+          riverctl map normal Super T toggle-fullscreen
+
+          riverctl map normal Super Up    send-layout-cmd rivertile "main-location top"
+          riverctl map normal Super Right send-layout-cmd rivertile "main-location right"
+          riverctl map normal Super Down  send-layout-cmd rivertile "main-location bottom"
+          riverctl map normal Super Left  send-layout-cmd rivertile "main-location left"
+
+          riverctl map normal Super H send-layout-cmd rivertile "main-ratio -0.05"
+          riverctl map normal Super I send-layout-cmd rivertile "main-ratio +0.05"
+
+          riverctl map normal Super+Shift H send-layout-cmd rivertile "main-count +1"
+          riverctl map normal Super+Shift I send-layout-cmd rivertile "main-count -1"
+
+          riverctl focus-follows-cursor normal
+
+          riverctl input 'pointer-*' accel-profile flat
+          riverctl input 'pointer-*' pointer-accel 0.4
+          riverctl hide-cursor timeout 4000
+          riverctl hide-cursor-when-typing enabled
+
+          riverctl keyboard-layout -variant colemak us
+
+          waybar &
+          steam &
+
+          wlr-randr --output HDMI-A-1 --off
+          wlr-randr --output HDMI-A-2 --on --mode 3840x2160@60 --scale 1.5 --pos 3840,288
+          wlr-randr --output DP-1 --on --mode 3840x2160@165 --pos 0,0
+
+          riverctl default-layout rivertile
+          rivertile -view-padding 0 -outer-padding 0 &
+        '';
+      };
+
 
       programs = {
         obs-studio = {
@@ -441,13 +520,11 @@
         enabled = false;
       };
 
-#      cursor = {
-#        inactive_timeout = 5;
-#      };
-      
+     cursor = {
+       inactive_timeout = 5;
+     };
+
       general = {
-        cursor_inactive_timeout = 5;
-        
         gaps_in = 0;
         gaps_out = 0;
 
