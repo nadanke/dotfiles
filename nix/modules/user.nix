@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
     users.users.nadanke = {
@@ -48,6 +48,7 @@
           dbgate
           postgresql
           pgadmin4-desktopmode
+          emacs-gtk
         ];
     };
 
@@ -104,6 +105,12 @@
           riverctl map normal Super Right send-layout-cmd rivertile "main-location right"
           riverctl map normal Super Down  send-layout-cmd rivertile "main-location bottom"
           riverctl map normal Super Left  send-layout-cmd rivertile "main-location left"
+
+          riverctl map normal Super Period focus-output next
+          riverctl map normal Super Comma focus-output previous
+
+          riverctl map normal Super+Shift Period send-to-output next
+          riverctl map normal Super+Shift Comma send-to-output previous
 
           riverctl map normal Super H send-layout-cmd rivertile "main-ratio -0.05"
           riverctl map normal Super I send-layout-cmd rivertile "main-ratio +0.05"
@@ -195,6 +202,8 @@
               position = "bottom";
               modules-left = [ "hyprland/workspaces" ];
               modules-center = [ "hyprland/window" ];
+              # modules-left = [ "river/tags" ];
+              # modules-center = [ "river/window" ];
               modules-right = [ "load" "wireplumber" "clock" "tray" ];
               output = [
                 "DP-1"
@@ -342,7 +351,7 @@
           * {
             font-family: Inter;
           }
-        
+
           #workspaces button.active {
             background: rgba(123,39,211,0.4);
             border-radius: 0;
@@ -365,6 +374,14 @@
           #workspaces button {
             padding-left: 5px;
             padding-right: 5px;
+          }
+
+          #tags button.occupied {
+            background: rgba(123, 93, 82, 0.5);
+          }
+
+          #tags button.focused {
+            background: rgba(92, 121, 211, 0.5);
           }
         '';
       };
@@ -410,6 +427,7 @@
     
     wayland.windowManager.hyprland.enable = true;
     wayland.windowManager.hyprland.systemd.variables = [ "--all" ];
+    wayland.windowManager.hyprland.package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
     wayland.windowManager.hyprland.settings = {
       "$mod" = "SUPER";
       monitor = [
@@ -528,7 +546,6 @@
         gaps_in = 0;
         gaps_out = 0;
 
-        #allow_tearing = true;
         layout = "dwindle";
 
         "col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
