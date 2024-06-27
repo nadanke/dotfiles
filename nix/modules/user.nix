@@ -1,6 +1,13 @@
 { config, pkgs, inputs, ... }:
 
 {
+  nixpkgs.overlays = [
+    (import (builtins.fetchTarball {
+      url = "https://github.com/nix-community/emacs-overlay/archive/master.tar.gz";
+      sha256 = "0pc3s563r552ddvwfslrk256dyp1i9hp2nv3i556w983p7lfwn8y";
+    }))
+  ];
+
     users.users.nadanke = {
         isNormalUser = true;
         description = "big shmingus";
@@ -48,7 +55,7 @@
           dbgate
           postgresql
           pgadmin4-desktopmode
-          emacs-gtk
+          emacs-pgtk
         ];
     };
 

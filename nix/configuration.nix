@@ -58,11 +58,16 @@
     unzip
     gcc
     clang
+    libtool
     gnumake
     ncurses
     gdu
     killall
     libnotify
+    cmake
+    mdl
+    discount
+    shellcheck
   ];
 
   hardware.logitech.wireless = {
