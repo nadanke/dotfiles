@@ -83,7 +83,6 @@ vim.o.expandtab = false
 -- [[ Configure and install plugins ]]
 require('lazy').setup({
   'tpope/vim-sleuth',
-  'mg979/vim-visual-multi',
   'github/copilot.vim',
   'nvim-treesitter/nvim-treesitter-context',
   'hrsh7th/cmp-buffer',
@@ -488,3 +487,21 @@ require('lazy').setup({
 })
 
 vim.cmd [[ autocmd TermOpen * setlocal nobuflisted ]]
+
+vim.opt.relativenumber = true
+
+vim.api.nvim_create_autocmd({ 'InsertEnter', 'WinLeave' }, {
+  callback = function()
+    if vim.opt.number then
+      vim.opt.relativenumber = false
+    end
+  end,
+})
+
+vim.api.nvim_create_autocmd({ 'InsertLeave', 'WinEnter' }, {
+  callback = function()
+    if vim.opt.number then
+      vim.opt.relativenumber = true
+    end
+  end,
+})
