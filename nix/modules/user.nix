@@ -56,6 +56,7 @@
           postgresql
           pgadmin4-desktopmode
           emacs-pgtk
+          yt-dlp
         ];
     };
 

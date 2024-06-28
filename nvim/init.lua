@@ -38,6 +38,7 @@ vim.keymap.set('n', '<leader>a', ':NvimTreeToggle<CR>', { noremap = true, silent
 vim.keymap.set('n', '<Tab>', ':bn<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<C-Tab>', ':bp<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<leader>n', '<cmd>lua vim.lsp.buf.hover()<CR>', { desc = 'Show [N]eovim LSP hover', noremap = true, silent = true })
+vim.keymap.set('n', '<C-y>', '<C-i>', { noremap = true, silent = true })
 
 vim.keymap.set('n', '<C-S-n>', ':Telescope find_files<CR>', { desc = 'Find files' })
 vim.keymap.set('n', '<C-S-g>', ':Telescope live_grep<CR>', { desc = 'Live grep' })
@@ -147,10 +148,10 @@ require('lazy').setup({
       hop.setup {
         keys = 'netsiroahuywf',
       }
-      vim.keymap.set('', 'f', ':HopChar1<CR>', { remap = true })
-      vim.keymap.set('v', 'f', '<cmd>HopChar1<CR>', { remap = true })
-      vim.keymap.set('', 'F', ':HopWord<CR>', { remap = true })
-      vim.keymap.set('v', 'F', '<cmd>HopWord<CR>', { remap = true })
+      vim.keymap.set('', 's', ':HopChar1<CR>', { remap = true })
+      vim.keymap.set('v', 's', '<cmd>HopChar1<CR>', { remap = true })
+      vim.keymap.set('', 'S', ':HopWord<CR>', { remap = true })
+      vim.keymap.set('v', 'S', '<cmd>HopWord<CR>', { remap = true })
     end,
   },
   {
@@ -416,6 +417,7 @@ require('lazy').setup({
               luasnip.jump(-1)
             end
           end, { 'i', 's' }),
+          ['<C-e'] = cmp.mapping.abort(),
         },
         sources = {
           { name = 'nvim_lsp' },
