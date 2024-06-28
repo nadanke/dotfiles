@@ -163,6 +163,8 @@
             code = "codium $argv";
             msync = "rsync -avh --progress $argv";
             fuckplasma = "procs --no-header --only PID kwin_wayland_wrapper | xargs kill -9";
+            mkill = "procs --no-header --only PID $argv | xargs kill -9";
+            emacs = "emacsclient -cn $argv";
           };
         };
 
