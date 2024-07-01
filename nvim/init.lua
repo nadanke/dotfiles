@@ -32,32 +32,22 @@ vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
-vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+vim.keymap.set('t', '<C-x>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 vim.keymap.set('n', '<leader><CR>', ':20sp term://fish | startinsert<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<leader>a', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<Tab>', ':bn<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<C-Tab>', ':bp<CR>', { noremap = true, silent = true })
-vim.keymap.set('n', '<leader>n', '<cmd>lua vim.lsp.buf.hover()<CR>', { desc = 'Show [N]eovim LSP hover', noremap = true, silent = true })
-vim.keymap.set('n', '<C-y>', '<C-i>', { noremap = true, silent = true })
+vim.keymap.set('n', '<C-w>n', '<C-w>h', { noremap = true })
+vim.keymap.set('n', '<C-w>e', '<C-w>j', { noremap = true })
+vim.keymap.set('n', '<C-w>u', '<C-w>k', { noremap = true })
+vim.keymap.set('n', '<C-w>i', '<C-w>l', { noremap = true })
 
-vim.keymap.set('n', '<C-S-n>', ':Telescope find_files<CR>', { desc = 'Find files' })
-vim.keymap.set('n', '<C-S-g>', ':Telescope live_grep<CR>', { desc = 'Live grep' })
-vim.keymap.set('n', '<C-S-b>', ':Telescope buffers<CR>', { desc = 'Find buffers' })
+vim.keymap.set('n', '<leader>sb', ':Telescope buffers<CR>', { desc = '[S]earch [B]uffers' })
 
 vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWinEnter' }, {
   pattern = 'term://*',
   command = 'startinsert',
 })
-
-vim.keymap.set('n', '<C-n>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
-vim.keymap.set('n', '<C-i>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
-vim.keymap.set('n', '<C-e>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
-vim.keymap.set('n', '<C-u>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
-
-vim.keymap.set('n', '<C-Left>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
-vim.keymap.set('n', '<C-Right>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
-vim.keymap.set('n', '<C-Down>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
-vim.keymap.set('n', '<C-Up>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
 vim.api.nvim_create_autocmd('TextYankPost', {
   desc = 'Highlight when yanking (copying) text',
@@ -166,6 +156,10 @@ require('lazy').setup({
         update_focused_file = {
           enable = true,
           update_cwd = true,
+        },
+        view = {
+          width = 40,
+          preserve_window_proportions = true,
         },
       }
     end,
@@ -417,7 +411,7 @@ require('lazy').setup({
               luasnip.jump(-1)
             end
           end, { 'i', 's' }),
-          ['<C-e'] = cmp.mapping.abort(),
+          ['<C-e>'] = cmp.mapping.abort(),
         },
         sources = {
           { name = 'nvim_lsp' },

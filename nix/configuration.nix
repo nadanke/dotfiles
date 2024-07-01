@@ -47,27 +47,8 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    procs
-    wev
+    neovim
     git
-    lsd
-    tealdeer
-    bat
-    fd
-    ripgrep
-    unzip
-    gcc
-    clang
-    libtool
-    gnumake
-    ncurses
-    gdu
-    killall
-    libnotify
-    cmake
-    mdl
-    discount
-    shellcheck
   ];
 
   hardware.logitech.wireless = {
@@ -105,6 +86,15 @@
     noto-fonts-emoji
   ];
 
+  fonts.fontconfig = {
+    hinting.style = "medium";
+    defaultFonts = {
+      serif = ["Inter"];
+      sansSerif = ["Inter"];
+      monospace = ["JetBrainsMono Nerd Font"];
+    };
+  };
+
   fileSystems."/mnt/sharez" = {
     device = "//192.168.0.136/nadanke";
     fsType = "cifs";
@@ -112,6 +102,10 @@
       # this line prevents hanging on network split
       automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s,user,users";
     in ["${automount_opts},credentials=/etc/nixos/smb-secrets,uid=1000,gid=1000"];
+  };
+
+  environment.variables = {
+    FREETYPE_PROPERTIES = "cff:no-stem-darkening=0 autofitter:no-stem-darkening=0";
   };
 }
 

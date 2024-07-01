@@ -7,7 +7,7 @@ G - go to the end of the file
 gg - go to the beginning of the file
 number G - go to the line number
 <C-o> - go back to the previous position
-<C-i> - go forward to the next position -> des muas i remappen
+<C-y> - go forward to the next position
 % - jump to the matching bracket
 
  4. To substitute new for the first old in a line type
@@ -29,5 +29,7 @@ number G - go to the line number
     To ask for confirmation each time add 'c'
 ~~~ cmd
         :%s/old/new/gc
-
+~~~
 :! - execute shell command
+
+

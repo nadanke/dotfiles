@@ -1,152 +1,100 @@
 { config, pkgs, inputs, ... }:
 
 {
-  nixpkgs.overlays = [
-    (import (builtins.fetchTarball {
-      url = "https://github.com/nix-community/emacs-overlay/archive/master.tar.gz";
-      sha256 = "0pc3s563r552ddvwfslrk256dyp1i9hp2nv3i556w983p7lfwn8y";
-    }))
-  ];
+  programs.gamemode = {
+    enable = true;
+    enableRenice = true;
+    settings = {
+      general = {
+        renice = 10;
+      };
 
-    users.users.nadanke = {
-        isNormalUser = true;
-        description = "big shmingus";
-        extraGroups = [ "networkmanager" "wheel" "docker" ];
-        packages = with pkgs; [
-          pavucontrol
-          mumble
-          bottom
-          slurp
-          grim
-          swappy
-          nmap
-          gamescope
-          gamescope-wsi
-          kdePackages.plasma-pa
-          element-desktop
-          spotify
-          losslesscut-bin
-          mpv
-          goverlay
-          mangohud
-          signal-desktop
-          slack
-          lxqt.lxqt-policykit
-          wlr-randr
-          jetbrains.webstorm
-          wl-clipboard
-          cliphist
-          nodejs_20
-          playerctl
-          openmw
-          godot_4
-          gpu-screen-recorder
-          bottles
-          wezterm
-          ethtool
-          networkmanagerapplet
-          neovim
-          distrobox
-          stremio
-          krita
-          pinta
-          gimp
-          imv
-          dbgate
-          postgresql
-          pgadmin4-desktopmode
-          emacs-pgtk
-          yt-dlp
-        ];
+      custom = {
+        start = "${pkgs.libnotify}/bin/notify-send 'GameMode started'";
+        end = "${pkgs.libnotify}/bin/notify-send 'GameMode ended'";
+      };
     };
+  };
+
+  users.users.nadanke = {
+      isNormalUser = true;
+      description = "big shmingus";
+      extraGroups = [ "networkmanager" "wheel" "docker" ];
+      packages = with pkgs; [
+        procs
+        wev
+        git
+        iperf3
+        lsd
+        tealdeer
+        bat
+        fd
+        ripgrep
+        unzip
+        gcc
+        clang
+        libtool
+        gnumake
+        ncurses
+        gdu
+        killall
+        zellij
+        libnotify
+        cmake
+        mdl
+        discount
+        shellcheck
+        pavucontrol
+        mumble
+        bottom
+        slurp
+        grim
+        swappy
+        nmap
+        gamescope
+        gamescope-wsi
+        kdePackages.plasma-pa
+        element-desktop
+        spotify
+        losslesscut-bin
+        mpv
+        goverlay
+        mangohud
+        signal-desktop
+        slack
+        lxqt.lxqt-policykit
+        wlr-randr
+        jetbrains.webstorm
+        wl-clipboard
+        cliphist
+        nodejs_20
+        playerctl
+        openmw
+        godot_4
+        gpu-screen-recorder
+        bottles
+        wezterm
+        ethtool
+        networkmanagerapplet
+        neovim
+        distrobox
+        stremio
+        krita
+        pinta
+        gimp
+        imv
+        dbgate
+        postgresql
+        pgadmin4-desktopmode
+        yt-dlp
+      ];
+  };
 
     # Enable automatic login for the user.
     services.getty.autologinUser = "nadanke";
 
     home-manager.users.nadanke = { pkgs, ... }: {
       home.stateVersion = "23.11";
-
-      wayland.windowManager.river = {
-        enable = true;
-        extraConfig = ''
-          riverctl map normal Super Return spawn alacritty
-          riverctl map normal Super Q close
-          riverctl map normal Super M exit
-          riverctl map normal Super X spawn brave
-          riverctl map normal Super C spawn thunar
-          riverctl map normal Super N focus-view next
-          riverctl map normal Super E focus-view previous
-          riverctl map normal Super+Shift N swap next
-          riverctl map normal Super+Shift E swap previous
-
-          riverctl map-pointer normal Super BTN_LEFT move-view
-          riverctl map-pointer normal Super BTN_RIGHT resize-view
-          riverctl map-pointer normal Super BTN_MIDDLE toggle-float
-
-          for i in $(seq 1 9)
-          do
-              tags=$((1 << ($i - 1)))
-
-              # Super+[1-9] to focus tag [0-8]
-              riverctl map normal Super $i set-focused-tags $tags
-
-              # Super+Shift+[1-9] to tag focused view with tag [0-8]
-              riverctl map normal Super+Shift $i set-view-tags $tags
-
-              # Super+Control+[1-9] to toggle focus of tag [0-8]
-              riverctl map normal Super+Control $i toggle-focused-tags $tags
-
-              # Super+Shift+Control+[1-9] to toggle tag [0-8] of focused view
-              riverctl map normal Super+Shift+Control $i toggle-view-tags $tags
-          done
-
-          all_tags=$(((1 << 32) - 1))
-          riverctl map normal Super 0 set-focused-tags $all_tags
-          riverctl map normal Super+Shift 0 set-view-tags $all_tags
-          riverctl map normal Super S spawn 'rofi -show drun -modes drun,run -show-icons'
-
-          riverctl map normal Super Backspace zoom
-
-          riverctl map normal Super T toggle-fullscreen
-
-          riverctl map normal Super Up    send-layout-cmd rivertile "main-location top"
-          riverctl map normal Super Right send-layout-cmd rivertile "main-location right"
-          riverctl map normal Super Down  send-layout-cmd rivertile "main-location bottom"
-          riverctl map normal Super Left  send-layout-cmd rivertile "main-location left"
-
-          riverctl map normal Super Period focus-output next
-          riverctl map normal Super Comma focus-output previous
-
-          riverctl map normal Super+Shift Period send-to-output next
-          riverctl map normal Super+Shift Comma send-to-output previous
-
-          riverctl map normal Super H send-layout-cmd rivertile "main-ratio -0.05"
-          riverctl map normal Super I send-layout-cmd rivertile "main-ratio +0.05"
-
-          riverctl map normal Super+Shift H send-layout-cmd rivertile "main-count +1"
-          riverctl map normal Super+Shift I send-layout-cmd rivertile "main-count -1"
-
-          riverctl focus-follows-cursor normal
-
-          riverctl input 'pointer-*' accel-profile flat
-          riverctl input 'pointer-*' pointer-accel 0.4
-          riverctl hide-cursor timeout 4000
-          riverctl hide-cursor-when-typing enabled
-
-          riverctl keyboard-layout -variant colemak us
-
-          waybar &
-          steam &
-
-          wlr-randr --output HDMI-A-1 --off
-          wlr-randr --output HDMI-A-2 --on --mode 3840x2160@60 --scale 1.5 --pos 3840,288
-          wlr-randr --output DP-1 --on --mode 3840x2160@165 --pos 0,0
-
-          riverctl default-layout rivertile
-          rivertile -view-padding 0 -outer-padding 0 &
-        '';
-      };
-
 
       programs = {
         obs-studio = {
@@ -165,7 +113,7 @@
             msync = "rsync -avh --progress $argv";
             fuckplasma = "procs --no-header --only PID kwin_wayland_wrapper | xargs kill -9";
             mkill = "procs --no-header --only PID $argv | xargs kill -9";
-            emacs = "emacsclient -cn $argv";
+            dc = "docker compose $argv";
           };
         };
 
@@ -179,11 +127,6 @@
               pager = true;
             };
           };
-        };
-
-        starship = {
-          enable = true;
-          enableFishIntegration = true;
         };
 
         hyprlock.enable = true;
@@ -212,8 +155,6 @@
               position = "bottom";
               modules-left = [ "hyprland/workspaces" ];
               modules-center = [ "hyprland/window" ];
-              # modules-left = [ "river/tags" ];
-              # modules-center = [ "river/window" ];
               modules-right = [ "load" "wireplumber" "clock" "tray" ];
               output = [
                 "DP-1"
@@ -437,7 +378,6 @@
     
     wayland.windowManager.hyprland.enable = true;
     wayland.windowManager.hyprland.systemd.variables = [ "--all" ];
-    wayland.windowManager.hyprland.package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
     wayland.windowManager.hyprland.settings = {
       "$mod" = "SUPER";
       monitor = [
