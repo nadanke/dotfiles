@@ -85,7 +85,6 @@
         imv
         dbgate
         postgresql
-        pgadmin4-desktopmode
         yt-dlp
       ];
   };
