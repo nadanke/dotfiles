@@ -22,6 +22,7 @@
       extraGroups = [ "networkmanager" "wheel" "docker" ];
       packages = with pkgs; [
         procs
+        gzdoom
         wev
         git
         iperf3

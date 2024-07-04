@@ -32,8 +32,7 @@ vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
-vim.keymap.set('t', '<C-x>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
-vim.keymap.set('n', '<leader><CR>', ':20sp term://fish | startinsert<CR>', { noremap = true, silent = true })
+vim.keymap.set('t', '<esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 vim.keymap.set('n', '<leader>a', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<Tab>', ':bn<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<C-Tab>', ':bp<CR>', { noremap = true, silent = true })
@@ -43,11 +42,6 @@ vim.keymap.set('n', '<C-w>u', '<C-w>k', { noremap = true })
 vim.keymap.set('n', '<C-w>i', '<C-w>l', { noremap = true })
 
 vim.keymap.set('n', '<leader>sb', ':Telescope buffers<CR>', { desc = '[S]earch [B]uffers' })
-
-vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWinEnter' }, {
-  pattern = 'term://*',
-  command = 'startinsert',
-})
 
 vim.api.nvim_create_autocmd('TextYankPost', {
   desc = 'Highlight when yanking (copying) text',
@@ -74,7 +68,13 @@ vim.o.expandtab = false
 -- [[ Configure and install plugins ]]
 require('lazy').setup({
   'tpope/vim-sleuth',
-  'github/copilot.vim',
+  -- 'github/copilot.vim',
+  {
+    'supermaven-inc/supermaven-nvim',
+    config = function()
+      require('supermaven-nvim').setup {}
+    end,
+  },
   'nvim-treesitter/nvim-treesitter-context',
   'hrsh7th/cmp-buffer',
   'hrsh7th/cmp-nvim-lua',
@@ -102,7 +102,11 @@ require('lazy').setup({
   {
     'akinsho/toggleterm.nvim',
     config = function()
-      require('toggleterm').setup {}
+      require('toggleterm').setup {
+        open_mapping = [[<c-\>]],
+        shell = 'fish',
+        start_in_insert = true,
+      }
     end,
   },
   {
@@ -484,6 +488,13 @@ require('lazy').setup({
     'norcalli/nvim-colorizer.lua',
     opts = {},
   },
+  {
+    'sindrets/diffview.nvim',
+  },
+  {
+    'nvim-treesitter/nvim-treesitter-textobjects',
+    dependencies = { 'nvim-treesitter/nvim-treesitter' },
+  },
 }, {
   ui = {
     icons = vim.g.have_nerd_font and {} or {
@@ -505,6 +516,12 @@ require('lazy').setup({
 })
 
 vim.cmd [[ autocmd TermOpen * setlocal nobuflisted ]]
+
+-- TODO i think this should be on EnterTerm instead TermOpen
+vim.api.nvim_create_autocmd('TermOpen', {
+  pattern = '*',
+  command = 'setlocal nonumber norelativenumber',
+})
 
 vim.opt.relativenumber = true
 
