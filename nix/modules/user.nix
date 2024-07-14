@@ -84,6 +84,7 @@
         pinta
         gimp
         imv
+        blueman
         dbgate
         postgresql
         yt-dlp
