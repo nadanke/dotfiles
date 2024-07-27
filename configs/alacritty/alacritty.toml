@@ -1,0 +1,8 @@
+shell = "fish"
+[font.normal]
+family = "JetBrainsMono Nerd Font"
+style = "Regular"
+
+[window.padding]
+x = 4
+y = 4
