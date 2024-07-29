@@ -322,6 +322,7 @@ require('lazy').setup({
         zls = {},
         hls = {},
         svelte = {},
+        html = {},
         lua_ls = {
           settings = {
             Lua = {
