@@ -33,7 +33,8 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagn
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 vim.keymap.set('t', '<esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
-vim.keymap.set('n', '<leader>a', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
+-- vim.keymap.set('n', '<leader>a', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>a', ':Oil --float<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<Tab>', ':bn<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<C-Tab>', ':bp<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<C-w>n', '<C-w>h', { noremap = true })
@@ -149,25 +150,31 @@ require('lazy').setup({
     end,
   },
   {
-    'nvim-tree/nvim-tree.lua',
-    version = '*',
-    lazy = false,
-    dependencies = {
-      'nvim-tree/nvim-web-devicons',
-    },
-    config = function()
-      require('nvim-tree').setup {
-        update_focused_file = {
-          enable = true,
-          update_cwd = true,
-        },
-        view = {
-          width = 40,
-          preserve_window_proportions = true,
-        },
-      }
-    end,
+    'stevearc/oil.nvim',
+    opts = {},
+    -- dependencies = { { 'echasnovski/mini.icons', opts = {} } },
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
   },
+  -- {
+  --   'nvim-tree/nvim-tree.lua',
+  --   version = '*',
+  --   lazy = false,
+  --   dependencies = {
+  --     'nvim-tree/nvim-web-devicons',
+  --   },
+  --   config = function()
+  --     require('nvim-tree').setup {
+  --       update_focused_file = {
+  --         enable = true,
+  --         update_cwd = true,
+  --       },
+  --       view = {
+  --         width = 40,
+  --         preserve_window_proportions = true,
+  --       },
+  --     }
+  --   end,
+  -- },
   { 'numToStr/Comment.nvim', opts = {} },
   {
     'lewis6991/gitsigns.nvim',
@@ -221,7 +228,6 @@ require('lazy').setup({
         end,
       },
       { 'nvim-telescope/telescope-ui-select.nvim' },
-      { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
     },
     config = function()
       require('telescope').setup {
@@ -322,6 +328,7 @@ require('lazy').setup({
         zls = {},
         hls = {},
         svelte = {},
+        tailwindcss = {},
         html = {},
         lua_ls = {
           settings = {
