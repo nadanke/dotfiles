@@ -27,6 +27,7 @@ SETUVAR fish_color_valid_path:\x2d\x2dunderline
 SETUVAR fish_cursor_insert:line
 SETUVAR fish_cursor_replace:underscore
 SETUVAR fish_cursor_replace_one:underscore
+SETUVAR fish_greeting:
 SETUVAR fish_key_bindings:fish_vi_key_bindings
 SETUVAR fish_pager_color_completion:normal
 SETUVAR fish_pager_color_description:yellow\x1e\x2di
