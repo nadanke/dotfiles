@@ -34,7 +34,7 @@ vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagn
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 vim.keymap.set('t', '<esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 -- vim.keymap.set('n', '<leader>a', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
-vim.keymap.set('n', '<leader>a', ':Oil --float<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>a', ':lua MiniFiles.open()<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<Tab>', ':bn<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<C-Tab>', ':bp<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<C-w>n', '<C-w>h', { noremap = true })
@@ -118,12 +118,15 @@ require('lazy').setup({
   },
   {
     'nvim-lualine/lualine.nvim',
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
     config = function()
       require('lualine').setup {
         options = {
           theme = 'tokyonight',
           section_separators = '',
           component_separators = '',
+          icons_enabled = true,
+          path = 1,
         },
       }
     end,
@@ -148,12 +151,6 @@ require('lazy').setup({
       vim.keymap.set('', 'S', ':HopWord<CR>', { remap = true })
       vim.keymap.set('v', 'S', '<cmd>HopWord<CR>', { remap = true })
     end,
-  },
-  {
-    'stevearc/oil.nvim',
-    opts = {},
-    -- dependencies = { { 'echasnovski/mini.icons', opts = {} } },
-    dependencies = { 'nvim-tree/nvim-web-devicons' },
   },
   -- {
   --   'nvim-tree/nvim-tree.lua',
@@ -231,6 +228,9 @@ require('lazy').setup({
     },
     config = function()
       require('telescope').setup {
+        defaults = {
+          path_display = { 'truncate' },
+        },
         extensions = {
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),
@@ -458,6 +458,12 @@ require('lazy').setup({
       require('mini.starter').setup()
       require('mini.map').setup()
       require('mini.sessions').setup()
+      require('mini.files').setup {
+        mappings = {
+          go_in = '<Right>',
+          go_out = '<Left>',
+        },
+      }
       -- local statusline = require 'mini.statusline'
       -- statusline.setup { use_icons = vim.g.have_nerd_font }
       -- statusline.section_location = function()
