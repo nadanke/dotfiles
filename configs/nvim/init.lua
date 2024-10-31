@@ -35,6 +35,14 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 vim.keymap.set('t', '<esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 -- vim.keymap.set('n', '<leader>a', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<leader>a', ':lua MiniFiles.open()<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>a', function()
+  local path = vim.api.nvim_buf_get_name(0)
+  if path == '' or path:match 'Starter' then
+    path = vim.fn.getcwd()
+  end
+  MiniFiles.open(path, false)
+  MiniFiles.reveal_cwd()
+end, { noremap = true, silent = true })
 vim.keymap.set('n', '<Tab>', ':bn<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<C-Tab>', ':bp<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<C-w>n', '<C-w>h', { noremap = true })
