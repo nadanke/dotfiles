@@ -1,3 +1,6 @@
 command = fish
 theme = catppuccin-mocha
 window-decoration = false
+font-feature = -calt
+font-feature = -liga
+font-feature = -dlig
