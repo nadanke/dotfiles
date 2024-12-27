@@ -24,6 +24,7 @@ vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 vim.opt.inccommand = 'split'
 vim.opt.cursorline = true
 vim.opt.scrolloff = 10
+vim.opt.termguicolors = true
 
 -- [[ Basic Keymaps ]]
 vim.opt.hlsearch = true
@@ -130,7 +131,7 @@ require('lazy').setup({
     config = function()
       require('lualine').setup {
         options = {
-          theme = 'tokyonight',
+          theme = 'catppuccin',
           section_separators = '',
           component_separators = '',
           icons_enabled = true,
@@ -142,7 +143,6 @@ require('lazy').setup({
   {
     'akinsho/bufferline.nvim',
     config = function()
-      vim.opt.termguicolors = true
       require('bufferline').setup {}
     end,
   },
@@ -449,14 +449,15 @@ require('lazy').setup({
       }
     end,
   },
-  {
-    'folke/tokyonight.nvim',
-    priority = 1000,
-    init = function()
-      vim.cmd.colorscheme 'tokyonight-night'
-      vim.cmd.hi 'Comment gui=none'
-    end,
-  },
+  -- {
+  --   'folke/tokyonight.nvim',
+  --   priority = 1000,
+  --   init = function()
+  --     vim.cmd.colorscheme 'tokyonight-night'
+  --     vim.cmd.hi 'Comment gui=none'
+  --   end,
+  -- },
+  { 'catppuccin/nvim', name = 'catppuccin', priority = 1000 },
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
   {
     'echasnovski/mini.nvim',
@@ -570,3 +571,5 @@ vim.api.nvim_create_autocmd({ 'InsertLeave', 'WinEnter' }, {
     end
   end,
 })
+
+vim.cmd.colorscheme 'catppuccin-mocha'
