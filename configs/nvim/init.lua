@@ -182,6 +182,18 @@ require('lazy').setup({
   -- },
   { 'numToStr/Comment.nvim', opts = {} },
   {
+    'utilyre/barbecue.nvim',
+    name = 'barbecue',
+    version = '*',
+    dependencies = {
+      'SmiteshP/nvim-navic',
+      'nvim-tree/nvim-web-devicons', -- optional dependency
+    },
+    opts = {
+      -- configurations go here
+    },
+  },
+  {
     'lewis6991/gitsigns.nvim',
     opts = {
       signs = {
