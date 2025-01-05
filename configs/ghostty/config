@@ -4,3 +4,4 @@ window-decoration = false
 font-feature = -calt
 font-feature = -liga
 font-feature = -dlig
+gtk-single-instance = true
