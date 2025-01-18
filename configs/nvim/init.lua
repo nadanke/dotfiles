@@ -145,6 +145,7 @@ require('lazy').setup({
     config = function()
       require('bufferline').setup {}
     end,
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
   },
   {
     'smoka7/hop.nvim',
@@ -160,39 +161,7 @@ require('lazy').setup({
       vim.keymap.set('v', 'S', '<cmd>HopWord<CR>', { remap = true })
     end,
   },
-  -- {
-  --   'nvim-tree/nvim-tree.lua',
-  --   version = '*',
-  --   lazy = false,
-  --   dependencies = {
-  --     'nvim-tree/nvim-web-devicons',
-  --   },
-  --   config = function()
-  --     require('nvim-tree').setup {
-  --       update_focused_file = {
-  --         enable = true,
-  --         update_cwd = true,
-  --       },
-  --       view = {
-  --         width = 40,
-  --         preserve_window_proportions = true,
-  --       },
-  --     }
-  --   end,
-  -- },
-  { 'numToStr/Comment.nvim', opts = {} },
-  {
-    'utilyre/barbecue.nvim',
-    name = 'barbecue',
-    version = '*',
-    dependencies = {
-      'SmiteshP/nvim-navic',
-      'nvim-tree/nvim-web-devicons', -- optional dependency
-    },
-    opts = {
-      -- configurations go here
-    },
-  },
+  { 'numToStr/Comment.nvim',    opts = {} },
   {
     'lewis6991/gitsigns.nvim',
     opts = {
@@ -205,25 +174,26 @@ require('lazy').setup({
       },
     },
   },
+  'Olical/conjure',
   {
     'folke/which-key.nvim',
     event = 'VimEnter',
     config = function()
       require('which-key').setup()
       require('which-key').add {
-        { '<leader>c', group = '[C]ode' },
+        { '<leader>c',  group = '[C]ode' },
         { '<leader>c_', hidden = true },
-        { '<leader>d', group = '[D]ocument' },
+        { '<leader>d',  group = '[D]ocument' },
         { '<leader>d_', hidden = true },
-        { '<leader>h', group = 'Git [H]unk' },
+        { '<leader>h',  group = 'Git [H]unk' },
         { '<leader>h_', hidden = true },
-        { '<leader>r', group = '[R]ename' },
+        { '<leader>r',  group = '[R]ename' },
         { '<leader>r_', hidden = true },
-        { '<leader>s', group = '[S]earch' },
+        { '<leader>s',  group = '[S]earch' },
         { '<leader>s_', hidden = true },
-        { '<leader>t', group = '[T]oggle' },
+        { '<leader>t',  group = '[T]oggle' },
         { '<leader>t_', hidden = true },
-        { '<leader>w', group = '[W]orkspace' },
+        { '<leader>w',  group = '[W]orkspace' },
         { '<leader>w_', hidden = true },
       }
       require('which-key').add {
@@ -293,8 +263,8 @@ require('lazy').setup({
       { 'williamboman/mason.nvim', config = true },
       'williamboman/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
-      { 'j-hui/fidget.nvim', opts = {} },
-      { 'folke/neodev.nvim', opts = {} },
+      { 'j-hui/fidget.nvim',       opts = {} },
+      { 'folke/neodev.nvim',       opts = {} },
     },
     config = function()
       vim.api.nvim_create_autocmd('LspAttach', {
@@ -350,6 +320,7 @@ require('lazy').setup({
         svelte = {},
         tailwindcss = {},
         html = {},
+        prettier = {},
         lua_ls = {
           settings = {
             Lua = {
@@ -469,8 +440,8 @@ require('lazy').setup({
   --     vim.cmd.hi 'Comment gui=none'
   --   end,
   -- },
-  { 'catppuccin/nvim', name = 'catppuccin', priority = 1000 },
-  { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
+  { 'catppuccin/nvim',          name = 'catppuccin', priority = 1000 },
+  { 'folke/todo-comments.nvim', event = 'VimEnter',  dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
   {
     'echasnovski/mini.nvim',
     config = function()
@@ -585,18 +556,18 @@ require('lazy').setup({
           },
           -- only if language is javascript, offer this debug action
           language == 'javascript'
-              and {
-                -- use nvim-dap-vscode-js's pwa-node debug adapter
-                type = 'pwa-node',
-                -- launch a new process to attach the debugger to
-                request = 'launch',
-                -- name of the debug action you have to select for this config
-                name = 'Launch file in new node process',
-                -- launch current file
-                program = '${file}',
-                cwd = '${workspaceFolder}',
-              }
-            or nil,
+          and {
+            -- use nvim-dap-vscode-js's pwa-node debug adapter
+            type = 'pwa-node',
+            -- launch a new process to attach the debugger to
+            request = 'launch',
+            -- name of the debug action you have to select for this config
+            name = 'Launch file in new node process',
+            -- launch current file
+            program = '${file}',
+            cwd = '${workspaceFolder}',
+          }
+          or nil,
         }
       end
       require('dapui').setup()
@@ -611,7 +582,7 @@ require('lazy').setup({
   {
     'kristijanhusak/vim-dadbod-ui',
     dependencies = {
-      { 'tpope/vim-dadbod', lazy = true },
+      { 'tpope/vim-dadbod',                     lazy = true },
       { 'kristijanhusak/vim-dadbod-completion', ft = { 'sql', 'mysql', 'plsql' }, lazy = true },
     },
     cmd = {
@@ -683,3 +654,10 @@ vim.api.nvim_create_autocmd({ 'InsertLeave', 'WinEnter' }, {
 })
 
 vim.cmd.colorscheme 'catppuccin-mocha'
+
+vim.api.nvim_create_autocmd('BufWritePre', {
+  pattern = '*', -- Use `*` for all file types, or specify filetypes like `*.lua,*.ts`
+  callback = function()
+    vim.lsp.buf.format()
+  end,
+})
