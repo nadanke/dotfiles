@@ -90,10 +90,7 @@
 (use-package dirvish
   :straight t
   :init
-  (dirvish-override-dired-mode)
-  :config
-  (setq dirvish-mode-line-format
-        '(:left (sort name) :right (omit yank index))))
+  (dirvish-override-dired-mode))
 
 (use-package sly
   :straight t
