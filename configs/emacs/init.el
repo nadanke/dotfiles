@@ -105,6 +105,31 @@
   (setq haskell-indent-spaces 2
         haskell-tags-on-save t))
 
+(use-package treesit
+  :mode (("\\.js\\'" . typescript-ts-mode)
+         ("\\.ts\\'" . typescript-ts-mode))
+  :preface
+  (defun os/setup-install-grammars ()
+    "Install Tree-sitter grammar if they are absent"
+    (interactive)
+    (dolist (grammar
+             '((javascript . ("https://github.com/tree-sitter/tree-sitter-javascript" "master" "src"))
+               (markdown "https://github.com/ikatyang/tree-sitter-markdown")
+               (elisp "https://github.com/Wilfred/tree-sitter-elisp")
+               (haskell "https://github.com/tree-sitter/tree-sitter-haskell")
+               (typescript . ("https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src"))))
+      (add-to-list 'treesit-language-source-alist grammar)
+      (unless (treesit-language-available-p (car grammar))
+        (treesit-install-language-grammar (car grammar)))))
+  :config
+  (os/setup-install-grammars))
+
+(use-package company
+             :straight t
+             :config
+             (add-hook 'after-init-hook 'global-company-mode))
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
