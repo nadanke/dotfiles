@@ -129,6 +129,8 @@
              :config
              (add-hook 'after-init-hook 'global-company-mode))
 
+(use-package racket-mode
+  :straight t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (custom-set-variables
