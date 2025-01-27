@@ -72,4 +72,5 @@ return {
 	},
 	"RRethy/vim-illuminate",
 	{ "akinsho/bufferline.nvim", version = "*", dependencies = "nvim-tree/nvim-web-devicons", opts = {} },
+	{ "github/copilot.vim" },
 }
