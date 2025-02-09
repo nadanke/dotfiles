@@ -9,6 +9,7 @@ return {
 				lua_ls = {},
 				ts_ls = {},
 				svelte = {},
+				ocamllsp = {},
 			},
 		},
 		config = function(_, opts)
