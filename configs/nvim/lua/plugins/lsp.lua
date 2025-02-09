@@ -7,6 +7,8 @@ return {
 		opts = {
 			servers = {
 				lua_ls = {},
+				ts_ls = {},
+				svelte = {},
 			},
 		},
 		config = function(_, opts)
