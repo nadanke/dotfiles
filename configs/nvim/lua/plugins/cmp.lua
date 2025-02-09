@@ -20,6 +20,10 @@ return {
 			-- See the full "keymap" documentation for information on defining your own keymap.
 			keymap = { preset = "default" },
 
+			completion = {
+				documentation = { auto_show = true, auto_show_delay_ms = 0 },
+			},
+
 			appearance = {
 				-- Sets the fallback highlight groups to nvim-cmp's highlight groups
 				-- Useful for when your theme doesn't support blink.cmp

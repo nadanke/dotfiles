@@ -14,12 +14,20 @@ else
   set shortmess=aoO
 endif
 badd +5 lua/plugins/snacks.lua
-badd +12 lua/plugins/lsp.lua
+badd +2 lua/plugins/lsp.lua
+badd +24 ~/dotfiles/configs/nvim/lua/plugins/cmp.lua
 argglobal
 %argdel
-edit lua/plugins/lsp.lua
+edit ~/dotfiles/configs/nvim/lua/plugins/cmp.lua
+wincmd t
+let s:save_winminheight = &winminheight
+let s:save_winminwidth = &winminwidth
+set winminheight=0
+set winheight=1
+set winminwidth=0
+set winwidth=1
 argglobal
-balt lua/plugins/snacks.lua
+balt lua/plugins/lsp.lua
 setlocal fdm=manual
 setlocal fde=0
 setlocal fmr={{{,}}}
@@ -30,12 +38,12 @@ setlocal fdn=20
 setlocal fen
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 12 - ((11 * winheight(0) + 37) / 75)
+let s:l = 24 - ((20 * winheight(0) + 21) / 42)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 12
-normal! 022|
+keepjumps 24
+normal! 065|
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
@@ -43,6 +51,8 @@ endif
 unlet! s:wipebuf
 set winheight=1 winwidth=20
 let &shortmess = s:shortmess_save
+let &winminheight = s:save_winminheight
+let &winminwidth = s:save_winminwidth
 let s:sx = expand("<sfile>:p:r")."x.vim"
 if filereadable(s:sx)
   exe "source " . fnameescape(s:sx)
