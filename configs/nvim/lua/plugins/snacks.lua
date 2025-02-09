@@ -1,12 +1,17 @@
 return {
 	{
 		"folke/snacks.nvim",
+		priority = 1000,
+		lazy = false,
 		---@type snacks.Config
 		opts = {
 			picker = {},
 			bigfile = {},
 			explorer = {},
-			indent = {},
+			indent = {
+				priority = 1,
+				enabled = true,
+			},
 			terminal = {},
 			words = {},
 		},
