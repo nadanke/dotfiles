@@ -4,6 +4,10 @@ return {
 		---@type snacks.Config
 		opts = {
 			picker = {},
+			bigfile = {},
+			explorer = {},
+			indent = {},
+			terminal = {},
 		},
 		keys = {
 			{ "<leader><space>", function() Snacks.picker.smart() end,           desc = "Smart Find Files" },
