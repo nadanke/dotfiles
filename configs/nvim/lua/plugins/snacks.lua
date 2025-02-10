@@ -16,6 +16,7 @@ return {
 			words = {},
 		},
 		keys = {
+			{ "<leader>\\",      function() Snacks.terminal() end,               desc = "Open Terminal" },
 			{ "<leader><space>", function() Snacks.picker.smart() end,           desc = "Smart Find Files" },
 			{ "<leader>,",       function() Snacks.picker.buffers() end,         desc = "Buffers" },
 			{ "<leader>/",       function() Snacks.picker.grep() end,            desc = "Grep" },
