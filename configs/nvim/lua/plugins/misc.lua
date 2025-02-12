@@ -1,76 +1,61 @@
 return {
 	"tpope/vim-sleuth",
-	{ -- Autoformat
+	{
 		"stevearc/conform.nvim",
 		event = { "BufWritePre" },
 		cmd = { "ConformInfo" },
 		keys = {
 			{
+				-- Customize or remove this keymap to your liking
 				"<leader>f",
 				function()
-					require("conform").format({ async = true, lsp_format = "fallback" })
+					require("conform").format({ async = true })
 				end,
 				mode = "",
-				desc = "[F]ormat buffer",
+				desc = "Format buffer",
 			},
 		},
+		-- This will provide type hinting with LuaLS
+		---@module "conform"
+		---@type conform.setupOpts
 		opts = {
-			notify_on_error = false,
-			format_on_save = function(bufnr)
-				-- Disable "format_on_save lsp_fallback" for languages that don't
-				-- have a well standardized coding style. You can add additional
-				-- languages here or re-enable it for the disabled ones.
-				local disable_filetypes = { c = true, cpp = true }
-				local lsp_format_opt
-				if disable_filetypes[vim.bo[bufnr].filetype] then
-					lsp_format_opt = "never"
-				else
-					lsp_format_opt = "fallback"
-				end
-				return {
-					timeout_ms = 500,
-					lsp_format = lsp_format_opt,
-				}
-			end,
+			-- Define your formatters
 			formatters_by_ft = {
 				lua = { "stylua" },
-				-- Conform can also run multiple formatters sequentially
-				-- python = { "isort", "black" },
-				--
-				-- You can use 'stop_after_first' to run the first available formatter from the list
-				-- javascript = { "prettierd", "prettier", stop_after_first = true },
+				python = { "isort", "black" },
+				javascript = { "prettierd", "prettier", stop_after_first = true },
+				typescript = { "prettierd", "prettier", stop_after_first = true },
+			},
+			-- Set default options
+			default_format_opts = {
+				lsp_format = "fallback",
+			},
+			-- Set up format-on-save
+			format_on_save = { timeout_ms = 500 },
+			-- Customize formatters
+			formatters = {
+				shfmt = {
+					prepend_args = { "-i", "2" },
+				},
 			},
 		},
-	},
-	{ "catppuccin/nvim", name = "catppuccin", priority = 1000 },
-	{
-		"smoka7/hop.nvim",
-		version = "*",
-		config = function()
-			local hop = require("hop")
-			hop.setup({
-				keys = "netsiroahuywf",
-			})
-			vim.keymap.set("", "s", ":HopChar1<CR>", { remap = true })
-			vim.keymap.set("v", "s", "<cmd>HopChar1<CR>", { remap = true })
-			vim.keymap.set("", "S", ":HopWord<CR>", { remap = true })
-			vim.keymap.set("v", "S", "<cmd>HopWord<CR>", { remap = true })
+		init = function()
+			-- If you want the formatexpr, here is the place to set it
+			vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 		end,
 	},
+	{ "catppuccin/nvim",         name = "catppuccin", priority = 1000 },
 	{
 		"bwpge/homekey.nvim",
 		opts = {},
 	},
 	{
-		"windwp/nvim-autopairs",
-		event = "InsertEnter",
-		config = true,
-	},
-	{
 		"norcalli/nvim-colorizer.lua",
 		opts = {},
 	},
-	"RRethy/vim-illuminate",
-	{ "akinsho/bufferline.nvim", version = "*", dependencies = "nvim-tree/nvim-web-devicons", opts = {} },
-	{ "github/copilot.vim" },
+	{ "akinsho/bufferline.nvim", version = "*",       dependencies = "nvim-tree/nvim-web-devicons", opts = {} },
+	{
+		"windwp/nvim-ts-autotag",
+		opts = {},
+	}
 }
