@@ -44,7 +44,7 @@ return {
 			vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 		end,
 	},
-	{ "catppuccin/nvim",         name = "catppuccin", priority = 1000 },
+	{ "catppuccin/nvim", name = "catppuccin", priority = 1000 },
 	{
 		"bwpge/homekey.nvim",
 		opts = {},
@@ -53,7 +53,15 @@ return {
 		"norcalli/nvim-colorizer.lua",
 		opts = {},
 	},
-	{ "akinsho/bufferline.nvim", version = "*",       dependencies = "nvim-tree/nvim-web-devicons", opts = {} },
+	{
+		"akinsho/bufferline.nvim",
+		dependencies = "nvim-tree/nvim-web-devicons",
+		config = function()
+			require("bufferline").setup {
+				highlights = require("catppuccin.groups.integrations.bufferline").get()
+			}
+		end,
+	},
 	{
 		"windwp/nvim-ts-autotag",
 		opts = {},

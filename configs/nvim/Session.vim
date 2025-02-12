@@ -13,16 +13,16 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +18 lua/plugins/snacks.lua
-badd +77 lua/plugins/folke.lua
+badd +26 lua/plugins/snacks.lua
+badd +55 lua/plugins/folke.lua
 badd +21 lua/plugins/mini.lua
 badd +45 ~/dotfiles/configs/nvim/lua/plugins/treesitter.lua
 badd +4 lua/plugins/lualine.lua
-badd +23 lua/plugins/misc.lua
-badd +7 ~/dotfiles/configs/nvim/lazy-lock.json
+badd +39 lua/plugins/misc.lua
+badd +3 ~/dotfiles/configs/nvim/lazy-lock.json
 argglobal
 %argdel
-edit lua/plugins/folke.lua
+edit lua/plugins/misc.lua
 wincmd t
 let s:save_winminheight = &winminheight
 let s:save_winminwidth = &winminwidth
@@ -31,7 +31,7 @@ set winheight=1
 set winminwidth=0
 set winwidth=1
 argglobal
-balt ~/dotfiles/configs/nvim/lazy-lock.json
+balt lua/plugins/lualine.lua
 setlocal fdm=manual
 setlocal fde=0
 setlocal fmr={{{,}}}
@@ -42,12 +42,12 @@ setlocal fdn=20
 setlocal fen
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 77 - ((58 * winheight(0) + 37) / 75)
+let s:l = 39 - ((21 * winheight(0) + 18) / 36)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 77
-normal! 012|
+keepjumps 39
+normal! 010|
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
