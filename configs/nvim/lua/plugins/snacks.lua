@@ -12,17 +12,23 @@ return {
 				priority = 1,
 				enabled = true,
 				animate = {
-					enabled = true,
-					style = "out",
-					easing = "linear",
-					duration = {
-						step = 10, -- ms per step
-						total = 200, -- maximum duration
-					},
+					enabled = false,
 				},
 			},
 			terminal = {},
 			words = {},
+			notifier = {},
+			quickfile = {},
+			scroll = {
+				animate = {
+					duration = { step = 10, total = 100 },
+					easing = "linear",
+				},
+				animate_repeat = {
+					delay = 100,
+					duration = { step = 5, total = 50 }
+				},
+			},
 		},
 		keys = {
 			{ "<leader>\\",      function() Snacks.terminal() end,               desc = "Open Terminal" },
