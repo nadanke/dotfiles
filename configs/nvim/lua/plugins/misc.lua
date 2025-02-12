@@ -42,34 +42,15 @@ return {
 			},
 		},
 	},
-	{ "catppuccin/nvim", name = "catppuccin", priority = 1000 },
-	{
-		"smoka7/hop.nvim",
-		version = "*",
-		config = function()
-			local hop = require("hop")
-			hop.setup({
-				keys = "netsiroahuywf",
-			})
-			vim.keymap.set("", "s", ":HopChar1<CR>", { remap = true })
-			vim.keymap.set("v", "s", "<cmd>HopChar1<CR>", { remap = true })
-			vim.keymap.set("", "S", ":HopWord<CR>", { remap = true })
-			vim.keymap.set("v", "S", "<cmd>HopWord<CR>", { remap = true })
-		end,
-	},
+	{ "catppuccin/nvim",         name = "catppuccin", priority = 1000 },
 	{
 		"bwpge/homekey.nvim",
 		opts = {},
 	},
 	{
-		"windwp/nvim-autopairs",
-		event = "InsertEnter",
-		config = true,
-	},
-	{
 		"norcalli/nvim-colorizer.lua",
 		opts = {},
 	},
-	"RRethy/vim-illuminate",
-	{ "akinsho/bufferline.nvim", version = "*", dependencies = "nvim-tree/nvim-web-devicons", opts = {} },
+	{ "akinsho/bufferline.nvim", version = "*",       dependencies = "nvim-tree/nvim-web-devicons", opts = {} },
 }
+
