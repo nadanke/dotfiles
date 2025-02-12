@@ -11,6 +11,15 @@ return {
 			indent = {
 				priority = 1,
 				enabled = true,
+				animate = {
+					enabled = true,
+					style = "out",
+					easing = "linear",
+					duration = {
+						step = 10, -- ms per step
+						total = 200, -- maximum duration
+					},
+				},
 			},
 			terminal = {},
 			words = {},
