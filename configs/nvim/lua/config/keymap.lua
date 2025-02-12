@@ -17,4 +17,6 @@ vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" }
 vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show diagnostic [E]rror messages" })
 
 vim.keymap.set("n", "<Tab>", ":bn<CR>", { noremap = true, silent = true })
-vim.keymap.set("n", "<C-Tab>", ":bp<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<M-Tab>", ":bp<CR>", { noremap = true, silent = true })
+
+vim.keymap.set("t", "<C-q>", "<C-\\><C-n><C-w>p", { desc = "Exit terminal and go to previous window" })
