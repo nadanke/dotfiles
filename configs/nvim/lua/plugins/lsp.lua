@@ -10,6 +10,7 @@ return {
 				ts_ls = {},
 				svelte = {},
 				ocamllsp = {},
+				tailwindcss = {},
 			},
 		},
 		config = function(_, opts)
@@ -37,6 +38,5 @@ return {
 				end
 			})
 		end,
-
 	},
 }
