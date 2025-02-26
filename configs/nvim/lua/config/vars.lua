@@ -1,7 +1,13 @@
+vim.o.guifont = "JetBrainsMonoNL Nerd Font:h12"
+
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 vim.g.have_nerd_font = true
+
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+-- vim.opt.foldexpr = "v:lua.vim.lsp.foldexpr()"
 
 -- line numbers
 vim.opt.number = true

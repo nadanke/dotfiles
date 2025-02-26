@@ -19,16 +19,16 @@ return {
 			words = {},
 			notifier = {},
 			quickfile = {},
-			scroll = {
-				animate = {
-					duration = { step = 10, total = 100 },
-					easing = "linear",
-				},
-				animate_repeat = {
-					delay = 100,
-					duration = { step = 5, total = 50 }
-				},
-			},
+			-- scroll = {
+			-- 	animate = {
+			-- 		duration = { step = 10, total = 100 },
+			-- 		easing = "linear",
+			-- 	},
+			-- 	animate_repeat = {
+			-- 		delay = 100,
+			-- 		duration = { step = 5, total = 50 }
+			-- 	},
+			-- },
 		},
 		keys = {
 			{ "<leader>\\",      function() Snacks.terminal() end,               desc = "Open Terminal" },
@@ -38,6 +38,7 @@ return {
 			{ "<leader>:",       function() Snacks.picker.command_history() end, desc = "Command History" },
 			{ "<leader>n",       function() Snacks.picker.notifications() end,   desc = "Notification History" },
 			{ "<leader>e",       function() Snacks.explorer() end,               desc = "File Explorer" },
+			{ "<leader>p",       function() Snacks.picker.projects() end,        desc = "Projects" },
 		}
 	},
 }
