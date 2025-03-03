@@ -29,12 +29,12 @@ return {
 						mode = mode or "n"
 						vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
 					end
-					map("gd", Snacks.picker.lsp_definitions, "Go to definition", { silent = true })
-					map("gD", Snacks.picker.lsp_references, "Go to references", { silent = true })
-					map("\"", Snacks.picker.registers, "Registers", { silent = true })
-					map("<leader>ld", Snacks.picker.diagnostics_buffer, "Diagnostics Buffer", { silent = true })
-					map("<leader>rn", vim.lsp.buf.rename, "Rename", { silent = true })
-					map("<leader>ca", vim.lsp.buf.code_action, "Code Action", { silent = true })
+					map("gd", Snacks.picker.lsp_definitions, "Go to definition")
+					map("gD", Snacks.picker.lsp_references, "Go to references")
+					map("\"", Snacks.picker.registers, "Registers")
+					map("<leader>ld", Snacks.picker.diagnostics_buffer, "Diagnostics Buffer")
+					map("<leader>rn", vim.lsp.buf.rename, "Rename")
+					map("<leader>ca", vim.lsp.buf.code_action, "Code Action")
 				end
 			})
 		end,
