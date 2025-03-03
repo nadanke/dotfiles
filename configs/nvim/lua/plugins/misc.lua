@@ -44,7 +44,16 @@ return {
 			vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 		end,
 	},
-	{ "catppuccin/nvim", name = "catppuccin", priority = 1000 },
+	{
+		"catppuccin/nvim",
+		name = "catppuccin",
+		priority = 1000,
+		opts = {
+			integrations = {
+				blink_cmp = true,
+			}
+		}
+	},
 	{
 		"bwpge/homekey.nvim",
 		opts = {},
