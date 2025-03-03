@@ -7,6 +7,7 @@ vim.g.have_nerd_font = true
 
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+vim.opt.foldlevel = 99
 -- vim.opt.foldexpr = "v:lua.vim.lsp.foldexpr()"
 
 -- line numbers
