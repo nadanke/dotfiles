@@ -38,8 +38,8 @@ return {
 			{ "<leader>/",       function() Snacks.picker.grep() end,            desc = "Grep" },
 			{ "<leader>:",       function() Snacks.picker.command_history() end, desc = "Command History" },
 			{ "<leader>n",       function() Snacks.picker.notifications() end,   desc = "Notification History" },
-			{ "<leader>e",       function() Snacks.explorer() end,               desc = "File Explorer" },
 			{ "<leader>p",       function() Snacks.picker.projects() end,        desc = "Projects" },
+			{ "<leader>s/",      function() Snacks.picker.search_history() end,  desc = "Search History" },
 		}
 	},
 }
