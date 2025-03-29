@@ -3,6 +3,10 @@ vim.g.maplocalleader = " "
 
 vim.g.have_nerd_font = true
 
+vim.o.winborder = "single"
+
+vim.diagnostic.config({ virtual_text = true })
+
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 vim.opt.foldlevel = 99

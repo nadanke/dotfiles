@@ -34,7 +34,6 @@ return {
 					map("\"", Snacks.picker.registers, "Registers")
 					map("<leader>ld", Snacks.picker.diagnostics_buffer, "Diagnostics Buffer")
 					map("<leader>rn", vim.lsp.buf.rename, "Rename")
-					map("<leader>ca", vim.lsp.buf.code_action, "Code Action")
 				end
 			})
 		end,
