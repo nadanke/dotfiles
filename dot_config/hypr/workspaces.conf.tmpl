@@ -1,3 +1,4 @@
+{{- if eq .chezmoi.hostname "sachiel" }}
 workspace = 1, monitor:DP-3
 workspace = 2, monitor:DP-1
 workspace = 3, monitor:DP-3
@@ -7,6 +8,19 @@ workspace = 6, monitor:DP-1
 workspace = 7, monitor:DP-3
 workspace = 8, monitor:DP-1
 workspace = 9, monitor:HDMI-A-1
+{{- end }}
+
+{{- if eq .chezmoi.hostname "fw" }}
+workspace = 1, monitor:eDP-1
+workspace = 2, monitor:$Display1
+workspace = 3, monitor:$Display2
+workspace = 4, monitor:eDP-1
+workspace = 5, monitor:$Display1
+workspace = 6, monitor:$Display2
+workspace = 7, monitor:eDP-1
+workspace = 8, monitor:$Display1
+workspace = 9, monitor:$Display2
+{{- end }}
 
 bind=$mod, 1, workspace, 1
 bind=$mod SHIFT, 1, movetoworkspace, 1

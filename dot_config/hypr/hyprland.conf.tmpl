@@ -5,12 +5,32 @@ source=~/.config/hypr/autostart.conf
 source=~/.config/hypr/workspaces.conf
 source=~/.config/hypr/binds.conf
 
+{{- if eq .chezmoi.hostname "sachiel" }}
 monitor = DP-3,     3840x2160@165,  0x0,       1.25,  vrr, 2, bitdepth, 10, cm, srgb, sdrsaturation, 2.2, sdrbrightness, 1.2
 # monitor = HDMI-A-1, 3840x2160@120,  5000x5000, 1,     vrr, 2, bitdepth, 10, cm, auto, mirror, DP-3
 monitor = DP-1,     3840x2160@60,   3072x288,  1.5,   vrr, 2, bitdepth, 10
 monitor = HDMI-A-1, disable
 # monitor=DP-1,disable
 # monitor=DP-3,disable
+{{- end }}
+
+{{- if eq .chezmoi.hostname "fw" }}
+monitor=eDP-1,2256x1504@60,0x0,1.566667
+monitor=$Display1,2560x1440@60, 1440x0,1
+monitor=$Display2,2560x1440@60, 4000x0,1
+
+workspace=1,monitor:eDP-1
+workspace=4,monitor:eDP-1
+workspace=7,monitor:eDP-1
+
+workspace=2,monitor:$Display1
+workspace=5,monitor:$Display1
+workspace=8,monitor:$Display1
+
+workspace=3,monitor:$Display2
+workspace=6,monitor:$Display2
+workspace=9,monitor:$Display3
+{{- end }}
 
 animations {
   enabled=false
@@ -43,9 +63,14 @@ render {
 
 cursor {
     inactive_timeout = 5
+{{- if eq .chezmoi.hostname "sachiel" }}
     default_monitor = DP-3
+{{- end }}
+
+{{- if eq .chezmoi.hostname "fw" }}
+    default_monitor = $Display2
+{{- end }}
     # use_cpu_buffer = true
-    # no_hardware_cursors = true
 }
 
 input {
@@ -56,9 +81,11 @@ input {
   kb_options=grp:win_space_toggle
 }
 
+{{- if eq .chezmoi.hostname "sachiel" }}
 xwayland {
   force_zero_scaling=true
 }
+{{- end }}
 
 
 env = LIBVA_DRIVER_NAME,nvidia
@@ -68,7 +95,12 @@ env = __GLX_VENDOR_LIBRARY_NAME,nvidia
 env = NVD_BACKEND,direct
 
 
-windowrulev2 = monitor DP-1, class:Spotify
+{{- if eq .chezmoi.hostname "sachiel" }}
+windowrule = monitor DP-1, class:Spotify
+{{- end }}
+{{- if eq .chezmoi.hostname "fw" }}
+windowrule = monitor eDP-1, class:Spotify
+{{- end }}
 
 # env = ELECTRON_OZONE_PLATFORM_HINT,auto
 

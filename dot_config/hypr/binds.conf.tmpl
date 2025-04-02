@@ -45,3 +45,7 @@ bindl=, XF86AudioPrev, exec, playerctl previous
 bindm=$mod, mouse:272, movewindow
 bindm=$mod, mouse:273, resizewindow
 bind=$mod, M, exec, fish -c neovide
+bind = $mod, L, exec, swaylock -c 000000
+
+bind = SHIFT, XF86AudioRaiseVolume, exec, playerctl -p spotify volume 0.03+
+bind = SHIFT, XF86AudioLowerVolume, exec, playerctl -p spotify volume 0.03-
