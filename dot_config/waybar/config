@@ -1,0 +1,31 @@
+[
+  {
+    "height": 26,
+    "layer": "top",
+    "modules-center": [
+      "hyprland/window"
+    ],
+    "modules-left": [
+      "hyprland/workspaces"
+    ],
+    "modules-right": [
+      "load",
+      "wireplumber",
+      "clock",
+      "tray"
+    ],
+    "output": [
+      "DP-3",
+      "DP-1",
+      "HDMI-A-1"
+    ],
+    "position": "bottom",
+    "spacing": 8,
+    "tray": {
+      "spacing": 4
+    },
+    "wireplumber": {
+      "on-click": "pavucontrol"
+    }
+  }
+]

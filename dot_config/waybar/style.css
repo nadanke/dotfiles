@@ -1,0 +1,30 @@
+@import "mocha.css";
+
+* {
+  font-family: Inter;
+}
+
+#workspaces button.active {
+  border-radius: 0;
+  color: @red;
+}
+
+window#waybar {
+  background: @base;
+}
+
+#clock, #tray {
+  padding-right: 8px;
+}
+
+#workspaces,
+#workspaces * {
+  padding: 0;
+  margin: 0;
+}
+
+#workspaces button {
+  padding-left: 5px;
+  padding-right: 5px;
+  color: @text;
+}
