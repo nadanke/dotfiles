@@ -1,4 +1,9 @@
+{{- if eq .chezmoi.hostname "mariofw" }}
+bind=$mod, x, exec, brave --ozone-platform-hint=auto
+{{- end}}
+{{- if eq .chezmoi.hostname "sachiel" }}
 bind=$mod, x, exec, brave # --ozone-platform-hint=auto
+{{- end }}
 bind=$mod, RETURN, exec, kitty
 bind=$mod SHIFT, RETURN, exec, kitty -o allow_remote_control=yes --listen-on unix:/tmp/mykitty
 # bind=$mod SHIFT, RETURN, exec, ghostty

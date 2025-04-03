@@ -1,5 +1,10 @@
 $mod=SUPER
 
+{{- if eq .chezmoi.hostname "mariofw" }}
+$Display1 = desc:Dell Inc. DELL P2720DC BP0HT03
+$Display2 = desc:Dell Inc. DELL P2720DC HP0HT03
+{{- end}}
+
 source=~/.config/hypr/mocha.conf
 source=~/.config/hypr/autostart.conf
 source=~/.config/hypr/workspaces.conf
@@ -14,7 +19,7 @@ monitor = HDMI-A-1, disable
 # monitor=DP-3,disable
 {{- end }}
 
-{{- if eq .chezmoi.hostname "fw" }}
+{{- if eq .chezmoi.hostname "mariofw" }}
 monitor=eDP-1,2256x1504@60,0x0,1.566667
 monitor=$Display1,2560x1440@60, 1440x0,1
 monitor=$Display2,2560x1440@60, 4000x0,1
@@ -67,7 +72,7 @@ cursor {
     default_monitor = DP-3
 {{- end }}
 
-{{- if eq .chezmoi.hostname "fw" }}
+{{- if eq .chezmoi.hostname "mariofw" }}
     default_monitor = $Display2
 {{- end }}
     # use_cpu_buffer = true
@@ -98,7 +103,7 @@ env = NVD_BACKEND,direct
 {{- if eq .chezmoi.hostname "sachiel" }}
 windowrule = monitor DP-1, class:Spotify
 {{- end }}
-{{- if eq .chezmoi.hostname "fw" }}
+{{- if eq .chezmoi.hostname "mariofw" }}
 windowrule = monitor eDP-1, class:Spotify
 {{- end }}
 

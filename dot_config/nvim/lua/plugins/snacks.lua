@@ -7,7 +7,6 @@ return {
 		opts = {
 			picker = {},
 			bigfile = {},
-			-- explorer = {},
 			indent = {
 				priority = 1,
 				enabled = true,
