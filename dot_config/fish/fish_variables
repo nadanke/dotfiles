@@ -49,7 +49,7 @@ SETUVAR fish_pager_color_selected_background:\x1d
 SETUVAR fish_pager_color_selected_completion:\x1d
 SETUVAR fish_pager_color_selected_description:\x1d
 SETUVAR fish_pager_color_selected_prefix:\x1d
-SETUVAR fish_user_paths:/home/nadanke/zig/zig\x1e/opt/cuda/bin\x1e/home/nadanke/\x2ezvm/bin\x1e/home/nadanke/Downloads/zig\x2dlinux\x2dx86_64\x2d0\x2e14\x2e0\x2ddev\x2e823\x2b624fa8523\x1e/home/nadanke/\x2eghcup/bin\x1e/home/nadanke/\x2ebun/bin
+SETUVAR fish_user_paths:/home/nadanke/\x2elocal/bin\x1e/home/nadanke/\x2ebun/bin
 SETUVAR pure_begin_prompt_with_current_directory:true
 SETUVAR pure_check_for_new_release:false
 SETUVAR pure_color_at_sign:pure_color_mute

@@ -5,11 +5,10 @@ exec-once = uwsm app -- waybar
 exec-once = uwsm app -- wl-paste --type text --watch cliphist store
 exec-once = uwsm app -- wl-paste --type image --watch cliphist store
 exec-once = uwsm app -- steam -silent
-exec-once = uwsm app -- solaar -w hide
-exec-once = uwsm app -- spotify-launcher
+exec-once = uwsm app -- flatpak run com.spotify.Client
 exec-once = uwsm app -- nm-applet
 exec-once = uwsm app -- blueman-applet
 
 {{- if eq .chezmoi.hostname "sachiel" }}
-exec-once = uwsm app -- xrandr --output DP-3 --primary
+exec-once = uwsm app -- xrandr --output DP-5 --primary
 {{- end }}
