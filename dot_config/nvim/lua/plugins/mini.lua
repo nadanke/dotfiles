@@ -19,6 +19,7 @@ return {
 			require("mini.pairs").setup()
 			require("mini.starter").setup()
 			require("mini.sessions").setup()
+			require("mini.bufremove").setup()
 			require("mini.files").setup({
 				mappings = {
 					go_in = "<Right>",
