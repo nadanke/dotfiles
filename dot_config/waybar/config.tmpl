@@ -1,6 +1,20 @@
 [
   {
+    {{- if eq .chezmoi.hostname "sachiel"}}
     "height": 27,
+    "output": [
+      "DP-5",
+      "DP-3",
+      "HDMI-A-1"
+    ],
+    {{- end }}
+    {{- if eq .chezmoi.hostname "mariofw" }}
+    "height": 27,
+    "output": [
+      "eDP-1",
+      "*",
+    ],
+    {{- end }}
     "layer": "top",
     "modules-center": [
       "hyprland/window"
@@ -13,11 +27,6 @@
       "wireplumber",
       "clock",
       "tray"
-    ],
-    "output": [
-      "DP-5",
-      "DP-3",
-      "HDMI-A-1"
     ],
     "position": "bottom",
     "spacing": 8,
