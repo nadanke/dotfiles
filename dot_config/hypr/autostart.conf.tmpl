@@ -8,9 +8,9 @@ exec-once = uwsm app -- steam -silent
 exec-once = uwsm app -- flatpak run com.spotify.Client
 exec-once = uwsm app -- nm-applet
 exec-once = uwsm app -- blueman-applet
-exec-once = kitty +kitten panel --edge=background -o window_margin_width='0 0 10 0' --output-name DP-5 btm
-exec-once = kitty +kitten panel --edge=background -o window_margin_width='0 0 10 0' --output-name DP-3 btm
 
 {{- if eq .chezmoi.hostname "sachiel" }}
 exec-once = uwsm app -- xrandr --output DP-5 --primary
+exec-once = kitty +kitten panel --edge=background -o window_margin_width='0 0 10 0' --output-name DP-5 btm
+exec-once = kitty +kitten panel --edge=background -o window_margin_width='0 0 10 0' --output-name DP-3 btm
 {{- end }}
