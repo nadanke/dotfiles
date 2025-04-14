@@ -82,9 +82,13 @@ input {
   follow_mouse=1
   force_no_accel=true
   kb_layout=us
-#  kb_variant=colemak
+{{- if eq .chezmoi.hostname "mariofw" }}
+  kb_variant=colemak
+{{- end }}
 }
+{{- if eq .chezmoi.hostname "sachiel" }}
 source=~/.config/hypr/input.conf
+{{- end }}
 
 {{- if eq .chezmoi.hostname "sachiel" }}
 xwayland {
