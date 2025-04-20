@@ -12,9 +12,9 @@ source=~/.config/hypr/binds.conf
 
 {{- if eq .chezmoi.hostname "sachiel" }}
 monitor = DP-5,     3840x2160@165,  0x0,       1.25,  vrr, 2, bitdepth, 10, cm, srgb, sdrsaturation, 1.2, sdrbrightness, 1.2
-# monitor = HDMI-A-1, 3840x2160@120,  5000x5000, 1,     vrr, 2, bitdepth, 10, cm, auto, mirror, DP-3
+# monitor = HDMI-A-3, 3840x2160@120,  5000x5000, 1,     vrr, 2, bitdepth, 10, cm, auto #, mirror, DP-3
 monitor = DP-3,     3840x2160@60,   3072x288,  1.5,   vrr, 2, bitdepth, 10
-monitor = HDMI-A-1, disable
+monitor = HDMI-A-3, disable
 # monitor=DP-1,disable
 # monitor=DP-3,disable
 {{- end }}
@@ -38,23 +38,23 @@ workspace=9,monitor:$Display3
 {{- end }}
 
 animations {
-  enabled=false
+  enabled = false
 }
 
 decoration {
-  rounding=0
+  rounding = 0
 }
 
 dwindle {
-  preserve_split=true
+  preserve_split = true
 }
 
 general {
-  col.active_border=$teal $sapphire 45deg
-  # col.inactive_border=rgba(595959aa)
-  gaps_in=0
-  gaps_out=0
-  layout=dwindle
+  col.active_border = $teal $sapphire 45deg
+  col.inactive_border = $surface0 $surface1 45deg
+  gaps_in = 0
+  gaps_out = 0
+  layout = dwindle
 }
 
 misc {
@@ -111,8 +111,30 @@ windowrule = monitor DP-3, class:Spotify
 windowrule = monitor eDP-1, class:Spotify
 {{- end }}
 
-# env = ELECTRON_OZONE_PLATFORM_HINT,auto
+env = ELECTRON_OZONE_PLATFORM_HINT,auto
 
 experimental {
   xx_color_management_v4 = false
+}
+
+group {
+  col.border_active = $green
+  col.border_inactive = $surface0 $surface1 45deg
+  col.border_locked_active = $yellow $peach 45deg
+  col.border_locked_inactive = $surface0 $surface1 45deg
+
+  groupbar {
+    height = 20
+    gradients = true
+    font_size = 12
+    indicator_height = 0
+    # keep_upper_gap = false
+    gaps_in = 0
+    gaps_out = 0
+    col.active = $base
+    col.inactive = $surface1
+    col.locked_active = $mantle
+    col.locked_inactive = $surface0
+    text_color = $text
+  }
 }

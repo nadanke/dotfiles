@@ -9,3 +9,4 @@ x-scheme-handler/jetbrains=jetbrains-toolbox.desktop
 [Added Associations]
 application/pdf=brave-browser.desktop;
 image/png=imv-dir.desktop;
+image/jpeg=imv-dir.desktop;
