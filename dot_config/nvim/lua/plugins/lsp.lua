@@ -31,7 +31,6 @@ return {
 					end
 					map("gd", Snacks.picker.lsp_definitions, "Go to definition")
 					map("gr", Snacks.picker.lsp_references, "Go to references")
-					map("\"", Snacks.picker.registers, "Registers")
 					map("<leader>ld", Snacks.picker.diagnostics_buffer, "Diagnostics Buffer")
 					map("<leader>rn", vim.lsp.buf.rename, "Rename")
 				end
