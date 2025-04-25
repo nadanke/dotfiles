@@ -109,12 +109,11 @@ windowrule = monitor DP-3, class:Spotify
 {{- end }}
 {{- if eq .chezmoi.hostname "mariofw" }}
 windowrule = monitor eDP-1, class:Spotify
+env = ELECTRON_OZONE_PLATFORM_HINT,auto
 {{- end }}
 
-env = ELECTRON_OZONE_PLATFORM_HINT,auto
-
 experimental {
-  xx_color_management_v4 = false
+  xx_color_management_v4 = true
 }
 
 group {
