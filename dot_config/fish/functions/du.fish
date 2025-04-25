@@ -1,3 +1,3 @@
 function du
-	duf $argv
+	dust $argv
 end
