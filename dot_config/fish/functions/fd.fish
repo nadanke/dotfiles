@@ -1,3 +1,3 @@
 function fd
-	fd --follow --colow=auto $argv
+	/usr/bin/fd --follow --color=auto $argv
 end
