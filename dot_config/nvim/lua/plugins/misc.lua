@@ -25,6 +25,7 @@ return {
 				python = { "isort", "black" },
 				javascript = { "prettierd", "prettier", stop_after_first = true },
 				typescript = { "prettierd", "prettier", stop_after_first = true },
+				ocaml = { "ocamlformat" },
 			},
 			-- Set default options
 			default_format_opts = {
@@ -37,6 +38,10 @@ return {
 				shfmt = {
 					prepend_args = { "-i", "2" },
 				},
+				ocamlformat = {
+					"--if-then-else", "vertical",
+					"--break-cases", "fit-or-vertical",
+					"--type-decl", "sparse" },
 			},
 		},
 		init = function()
