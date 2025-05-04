@@ -18,17 +18,17 @@ return {
 			words = {},
 			notifier = {},
 			quickfile = {},
-			scroll = {
-				enabled = vim.g.neovide and false or true,
-				animate = {
-					duration = { step = 10, total = 100 },
-					easing = "linear",
-				},
-				animate_repeat = {
-					delay = 100,
-					duration = { step = 5, total = 50 }
-				},
-			},
+			-- scroll = {
+			-- 	enabled = vim.g.neovide and false or true,
+			-- 	animate = {
+			-- 		duration = { step = 10, total = 100 },
+			-- 		easing = "linear",
+			-- 	},
+			-- 	animate_repeat = {
+			-- 		delay = 100,
+			-- 		duration = { step = 5, total = 50 }
+			-- 	},
+			-- },
 		},
 		keys = {
 			{ "<leader>\\",      function() Snacks.terminal() end,               desc = "Open Terminal" },
