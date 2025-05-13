@@ -1,7 +1,7 @@
-main.config_file_version 1
+main.config_file_version 2
 main.hotkeys_enable_option enable_hotkeys
 main.joystick_hotkeys_enable_option disable_hotkeys
-main.show_hide_hotkey 0 0
+main.show_hide_hotkey 26 16
 main.software_encoding_warning_shown false
 main.tint_color nvidia
 record.container mp4
@@ -9,7 +9,8 @@ record.pause_unpause_hotkey 0 0
 record.record_options.advanced_view false
 record.record_options.application_audio_invert false
 record.record_options.audio_codec opus
-record.record_options.audio_track default_output
+record.record_options.audio_track_item false [add_audio_track]
+record.record_options.audio_track_item false default_output
 record.record_options.change_video_resolution false
 record.record_options.codec auto
 record.record_options.color_range limited
@@ -35,7 +36,8 @@ replay.container mp4
 replay.record_options.advanced_view false
 replay.record_options.application_audio_invert false
 replay.record_options.audio_codec opus
-replay.record_options.audio_track default_output
+replay.record_options.audio_track_item false [add_audio_track]
+replay.record_options.audio_track_item false default_output
 replay.record_options.change_video_resolution false
 replay.record_options.codec auto
 replay.record_options.color_range limited
@@ -53,6 +55,8 @@ replay.record_options.video_height 0
 replay.record_options.video_quality custom
 replay.record_options.video_width 0
 replay.restart_replay_on_save false
+replay.save_10_min_hotkey 97 16
+replay.save_1_min_hotkey 96 16
 replay.save_directory /home/nadanke/
 replay.save_hotkey 0 0
 replay.save_video_in_game_folder false
@@ -80,7 +84,8 @@ streaming.custom.url
 streaming.record_options.advanced_view false
 streaming.record_options.application_audio_invert false
 streaming.record_options.audio_codec opus
-streaming.record_options.audio_track default_output
+streaming.record_options.audio_track_item false [add_audio_track]
+streaming.record_options.audio_track_item false default_output
 streaming.record_options.change_video_resolution false
 streaming.record_options.codec auto
 streaming.record_options.color_range limited
