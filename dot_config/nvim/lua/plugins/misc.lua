@@ -1,5 +1,4 @@
 return {
-	"tpope/vim-sleuth",
 	{
 		"stevearc/conform.nvim",
 		event = { "BufWritePre" },
