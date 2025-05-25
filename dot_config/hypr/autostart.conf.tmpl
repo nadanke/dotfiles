@@ -10,7 +10,5 @@ exec-once = uwsm app -- nm-applet
 exec-once = uwsm app -- blueman-applet
 
 {{- if eq .chezmoi.hostname "sachiel" }}
-exec-once = uwsm app -- xrandr --output DP-5 --primary
-exec-once = kitty +kitten panel --edge=background -o window_margin_width='0 0 10 0' --output-name DP-5 btm
-exec-once = kitty +kitten panel --edge=background -o window_margin_width='0 0 10 0' --output-name DP-3 btm
+exec-once = xrandr --output DP-5 --primary
 {{- end }}
