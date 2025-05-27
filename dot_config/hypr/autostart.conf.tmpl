@@ -1,5 +1,4 @@
 exec-once = uwsm app -- dbus-update-activation-environment --systemd --all
-exec-once = uwsm app -- gsr-ui
 exec-once = uwsm app -- lxqt-policykit-agent
 exec-once = uwsm app -- waybar
 exec-once = uwsm app -- wl-paste --type text --watch cliphist store
@@ -11,4 +10,5 @@ exec-once = uwsm app -- blueman-applet
 
 {{- if eq .chezmoi.hostname "sachiel" }}
 exec-once = xrandr --output DP-5 --primary
+# exec-once = uwsm app -- gsr-ui
 {{- end }}
