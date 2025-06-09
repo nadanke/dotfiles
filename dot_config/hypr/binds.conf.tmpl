@@ -5,8 +5,8 @@ bind=$mod, x, exec, brave --ozone-platform-hint=auto
 {{- if eq .chezmoi.hostname "sachiel" }}
 bind=$mod, x, exec, brave #--enable-features=WaylandLinuxDrmSyncobj # --ozone-platform-hint=auto
 {{- end }}
-bind=$mod, RETURN, exec, ghostty
-# bind=$mod SHIFT, RETURN, exec, kitty -o allow_remote_control=yes --listen-on unix:/tmp/mykitty
+bind=$mod, RETURN, exec, kitty
+bind=$mod SHIFT, RETURN, exec, kitty -o allow_remote_control=yes --listen-on unix:/tmp/mykitty
 bind=$mod, q, killactive,
 bind=$mod SHIFT, m, exec, uwsm stop
 bind=$mod, c, exec, thunar
