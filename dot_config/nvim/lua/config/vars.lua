@@ -12,13 +12,13 @@ vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 vim.opt.foldlevel = 99
 -- Prefer LSP folding if client supports it
 vim.api.nvim_create_autocmd('LspAttach', {
-	callback = function(args)
-		local client = vim.lsp.get_client_by_id(args.data.client_id)
-		if client and client:supports_method('textDocument/foldingRange') then
-			local win = vim.api.nvim_get_current_win()
-			vim.wo[win][0].foldexpr = 'v:lua.vim.lsp.foldexpr()'
-		end
-	end,
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if client and client:supports_method('textDocument/foldingRange') then
+      local win = vim.api.nvim_get_current_win()
+      vim.wo[win][0].foldexpr = 'v:lua.vim.lsp.foldexpr()'
+    end
+  end,
 })
 
 
@@ -35,7 +35,7 @@ vim.opt.showmode = false
 
 -- sync clipboard to system
 vim.schedule(function()
-	vim.opt.clipboard = "unnamedplus"
+  vim.opt.clipboard = "unnamedplus"
 end)
 
 -- Enable break indent
@@ -77,7 +77,6 @@ vim.opt.cursorline = true
 vim.opt.scrolloff = 10
 
 vim.o.autoindent = true
-vim.o.smartindent = true
 vim.o.tabstop = 2
 vim.o.shiftwidth = 2
 vim.o.expandtab = false
